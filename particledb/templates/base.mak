@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="${request.static_url('particledb:static/img/favicon.png')}">
 
-    <title>ParticleDB Home</title>
+    <title>Particle</title>
 
     <link href="${request.static_url('particledb:static/css/dist/bootstrap/bootstrap.min.css')}" rel="stylesheet">
     <link href="${request.static_url('particledb:static/css/main.css')}" rel="stylesheet">
