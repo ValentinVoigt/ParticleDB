@@ -1,3 +1,5 @@
+<%namespace file="functions/brand.mak" import="brand" />
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">ParticleDB</a>
+          <a class="navbar-brand" href="#">${brand()}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
