@@ -1,1 +1,3 @@
-ParticleDB.egg-info/
+./ParticleDB.egg-info/
+./development.ini
+./production.ini
