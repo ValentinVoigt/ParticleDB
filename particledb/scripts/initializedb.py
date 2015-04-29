@@ -12,7 +12,7 @@ from pyramid.paster import (
 from pyramid.scripts.common import parse_vars
 
 from ..models import DBSession, Base
-from ..models import Manufacturer, Part
+from ..models import Manufacturer, Part, Package
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
@@ -24,6 +24,13 @@ def create_models():
     m = Manufacturer(name='Maxim')
     yield m
     yield Part(mpn="TEST123", description="Simple Test component", manufacturer=m)
+    
+    for i in [2, 3]:
+        yield Package(name="TO-220", pins=i)
+        yield Package(name="TO-92", pins=i)
+    
+    for i in range(4, 28+1, 2):
+        yield Package(name="DIP-%i" % i, pins=i)
     
 def main(argv=sys.argv):
     if len(argv) < 2:

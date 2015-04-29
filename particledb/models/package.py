@@ -3,12 +3,12 @@ from sqlalchemy.orm import relationship, backref
 
 from . import Base
 
-class Manufacturer(Base):
-    """ Represents a part's manufacturer.
+class Package(Base):
+    """ Represents a part's package (like TO-220).
     """
-    __tablename__ = 'manufacturers'
+    __tablename__ = 'packages'
 
     id = Column('id', Integer, primary_key=True)
     name = Column('name', String(45), nullable=False)
-    logofile = Column('logofile', String(45))
-    parts = relationship("Part", backref="manufacturer")
+    pins = Column('pins', Integer, nullable=False)
+    picture = Column('description', String(45))
