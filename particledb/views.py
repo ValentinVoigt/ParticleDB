@@ -6,7 +6,7 @@ from sqlalchemy.exc import DBAPIError
 from .models import DBSession
 from .models.example import MyModel
 
-@view_config(route_name='home', renderer='templates/mytemplate.pt')
+@view_config(route_name='home', renderer='templates/home.mak')
 def my_view(request):
     try:
         one = DBSession.query(MyModel).filter(MyModel.name == 'one').first()
