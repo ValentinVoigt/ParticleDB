@@ -1,6 +1,6 @@
 from pyramid.view import view_config, view_defaults
 
-from ..models import DBSession, Part, Package
+from ..models import DBSession, Part, Package, Manufacturer
 
 from .base import BaseView
 
@@ -33,3 +33,9 @@ class ListView(ListViewAbstract):
         renderer='particledb:templates/list_packages.mak')
     def list_packages(self):
         return self.serve(DBSession.query(Package))
+        
+    @view_config(
+        route_name='list_manufacturers',
+        renderer='particledb:templates/list_manufacturers.mak')
+    def list_manufacturers(self):
+        return self.serve(DBSession.query(Manufacturer))

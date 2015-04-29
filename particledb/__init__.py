@@ -15,6 +15,7 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.add_route('list_parts', '/list/parts/{page}')
     config.add_route('list_packages', '/list/packages/{page}')
+    config.add_route('list_manufacturers', '/list/manufacturers/{page}')
     config.add_route('part', '/parts/{part_mpn}')
 
     config.scan()
