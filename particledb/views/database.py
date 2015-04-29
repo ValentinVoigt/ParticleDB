@@ -4,6 +4,8 @@ from ..models import DBSession, Part, Package
 
 from .base import BaseView
 
+from ..utils.pagination import Pagination
+
 @view_defaults(request_method='GET')
 class ListView(BaseView):
 
@@ -13,20 +15,20 @@ class ListView(BaseView):
         """
         return self.request.matched_route.name
 
-class ListPartsView(ListView):
+    def serve(self, query):
+        pagination = Pagination(query, self.request)
+        return {'pagination': pagination}
+        
+class ListView(ListView):
 
     @view_config(
         route_name='list_parts',
         renderer='particledb:templates/list_parts.mak')
-    def list_parts(request):
-        parts = DBSession.query(Part).all()
-        return {'parts': parts}
-        
-class ListPackagesView(ListView):
+    def list_parts(self):
+        return self.serve(DBSession.query(Part))
 
     @view_config(
         route_name='list_packages',
         renderer='particledb:templates/list_packages.mak')
-    def list_packages(request):
-        packages = DBSession.query(Package).all()
-        return {'packages': packages}
+    def list_packages(self):
+        return self.serve(DBSession.query(Package))

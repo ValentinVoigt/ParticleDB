@@ -1,5 +1,7 @@
 <%inherit file="base.mak" />
 
+<%namespace file="functions/pagination.mak" import="paginate" />
+
 <h1 class="page-header">List of registered parts</h1>
 
 <div class="table-responsive">
@@ -13,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            % for part in parts:
+            % for part in pagination.current_dataset:
             <tr>
                 <td>${part.id}</td>
                 <td>${part.mpn}</td>
@@ -24,3 +26,5 @@
         </tbody>
     </table>
 </div>
+
+${paginate(pagination)}
