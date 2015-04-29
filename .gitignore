@@ -1,3 +1,5 @@
-./ParticleDB.egg-info/
-./development.ini
-./production.ini
+/ParticleDB.egg-info/
+/development.ini
+/production.ini
+/ParticleDB.sqlite
+__pycache__/
