@@ -19,7 +19,7 @@
             <tr>
                 <td>${manufacturer.id}</td>
                 <td>${manufacturer.name}</td>
-                <td>${make_image(manufacturer.logo_image)}</td>
+                <td>${make_image(manufacturer.logo_image, height=35)}</td>
             </tr>
             % endfor
         </tbody>
