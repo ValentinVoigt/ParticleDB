@@ -12,7 +12,7 @@ from pyramid.paster import (
 from pyramid.scripts.common import parse_vars
 
 from ..models import DBSession, Base
-from ..models import Manufacturer, Part, Package
+from ..models import Manufacturer, Part, Package, Image
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
@@ -21,7 +21,9 @@ def usage(argv):
     sys.exit(1)
 
 def create_models():
-    m = Manufacturer(name='Maxim')
+    i = Image(path='manufacturers/maxim.svg', alt="Maxim Logo")
+    yield i
+    m = Manufacturer(name='Maxim', logo_image=i)
     yield m
     yield Part(mpn="TEST123", description="Simple Test component", manufacturer=m)
     

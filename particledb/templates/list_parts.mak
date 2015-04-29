@@ -18,7 +18,9 @@
             % for part in pagination.current_dataset:
             <tr>
                 <td>${part.id}</td>
-                <td>${part.mpn}</td>
+                <td>
+                    <a href="${request.route_path("part", part_mpn=part.mpn)}">${part.mpn}</a>
+                </td>
                 <td>${part.manufacturer.name}</td>
                 <td>${part.description}</td>
             </tr>

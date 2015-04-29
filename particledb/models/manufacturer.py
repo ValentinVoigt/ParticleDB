@@ -10,5 +10,7 @@ class Manufacturer(Base):
 
     id = Column('id', Integer, primary_key=True)
     name = Column('name', String(45), nullable=False)
-    logofile = Column('logofile', String(45))
     parts = relationship("Part", backref="manufacturer")
+    
+    logo_image_id = Column(Integer, ForeignKey('images.id'))
+    logo_image = relationship("Image")

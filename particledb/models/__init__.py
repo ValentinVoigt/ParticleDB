@@ -5,8 +5,10 @@ from zope.sqlalchemy import ZopeTransactionExtension
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
+from .image import Image
+from .manufacturer import Manufacturer
 from .package import Package
 from .part import Part
-from .manufacturer import Manufacturer
 
-__all__ = ['Package', 'Part', 'Manufacturer']
+
+__all__ = ['Image', 'Manufacturer', 'Package', 'Part']

@@ -9,6 +9,6 @@ class Part(Base):
     __tablename__ = 'parts'
 
     id = Column('id', Integer, primary_key=True)
-    mpn = Column('mpn', String(45), nullable=False)
+    mpn = Column('mpn', String(45), unique=True, nullable=False)
     description = Column('description', String(45))
     manufacturers_id  = Column('manufacturers_id', Integer, ForeignKey('manufacturers.id'))
