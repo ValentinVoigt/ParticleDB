@@ -6,20 +6,18 @@ ParticleDB is a webinterface for managing your electronic parts.
 Changing working directory
 --------------------------
 
-- cd <directory containing this file>
+    cd <directory containing this file>
 
 Configuration
 -------------
 
-- cp development.ini.default cp development.ini
+    cp development.ini.default development.ini
 
-- edit development.ini to your need
+Edit development.ini to your needs.
 
 Getting Started
 ---------------
 
-- $VENV/bin/python setup.py develop
-
-- $VENV/bin/initialize_ParticleDB_db development.ini
-
-- $VENV/bin/pserve development.ini
+    $VENV/bin/python setup.py develop
+    $VENV/bin/initialize_ParticleDB_db development.ini
+    $VENV/bin/pserve development.ini
