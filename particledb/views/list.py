@@ -7,7 +7,8 @@ from .base import BaseView
 from ..utils.pagination import Pagination
 
 @view_defaults(request_method='GET')
-class ListView(BaseView):
+
+class ListViewAbstract(BaseView):
 
     @property
     def nav_active(self):
@@ -19,7 +20,7 @@ class ListView(BaseView):
         pagination = Pagination(query, self.request)
         return {'pagination': pagination}
         
-class ListView(ListView):
+class ListView(ListViewAbstract):
 
     @view_config(
         route_name='list_parts',

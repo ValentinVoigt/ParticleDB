@@ -18,7 +18,4 @@ class BaseView:
             "Database contents",
             ('list_parts', 'List of parts', self.request.route_path('list_parts', page=1),),
             ('list_packages', 'List of packages', self.request.route_path('list_packages', page=1),),
-            None,
-            "Example",
-            ('example', 'Example page', self.request.route_path('example'),),
         ]
