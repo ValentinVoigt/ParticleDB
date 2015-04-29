@@ -17,6 +17,7 @@ def main(global_config, **settings):
     config.add_route('list_packages', '/list/packages/{page}')
     config.add_route('list_manufacturers', '/list/manufacturers/{page}')
     config.add_route('part', '/parts/{part_mpn}')
+    config.add_route('search_prefetch', '/search-prefetch')
 
     config.scan()
     return config.make_wsgi_app()

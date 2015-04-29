@@ -15,6 +15,7 @@
         <title>Particle</title>
 
         <link href="${request.static_url('particledb:static/css/dist/bootstrap/bootstrap.min.css')}" rel="stylesheet">
+        <link href="${request.static_url('particledb:static/css/dist/typeahead.js/theme.css')}" rel="stylesheet">
         <link href="${request.static_url('particledb:static/css/main.css')}" rel="stylesheet">
 
         <!--[if lt IE 9]>
@@ -35,8 +36,8 @@
                     <a class="navbar-brand" href="${request.route_path('home')}">${brand()}</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right">
-                        <input type="text" class="form-control" placeholder="Search...">
+                    <form class="navbar-form navbar-left" id="search">
+                        <input type="text" class="form-control typeahead" placeholder="Search...">
                     </form>
                 </div>
             </div>
@@ -53,7 +54,15 @@
             </div>
         </div>
 
+        <script>
+            var js_globals = {
+                search_prefetch_url: "${request.route_path('search_prefetch')}",
+                search_dest_url: "${request.route_path('part', part_mpn="__mpn__")}",
+            };
+        </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/dist/typeahead.js/typeahead.bundle.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootstrap/bootstrap.min.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/search.js')}"></script>
     </body>
 </html>
