@@ -12,7 +12,7 @@ from pyramid.paster import (
 from pyramid.scripts.common import parse_vars
 
 from ..models import DBSession, Base
-from ..models.example import MyModel
+from ..models import Manufacturer, Part
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
@@ -20,7 +20,11 @@ def usage(argv):
           '(example: "%s development.ini")' % (cmd, cmd))
     sys.exit(1)
 
-
+def create_models():
+    m = Manufacturer(name='Maxim')
+    yield m
+    yield Part(mpn="TEST123", description="Simple Test component", manufacturer=m)
+    
 def main(argv=sys.argv):
     if len(argv) < 2:
         usage(argv)
@@ -32,5 +36,5 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
     with transaction.manager:
-        model = MyModel(name='one', value=1)
-        DBSession.add(model)
+        for model in create_models():
+            DBSession.add(model)
