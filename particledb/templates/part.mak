@@ -13,8 +13,15 @@
         <div class="panel-heading">
             <h3 class="panel-title">${part.manufacturer.name}</h3>
         </div>
-        <div class="panel-body">
-            ${make_image(part.manufacturer.logo_image, width=150)}
+        <div class="panel-body" style="padding:15px 40px">
+            % if part.manufacturer.logo_image:
+                ${make_image(part.manufacturer.logo_image, width=150)}
+            % endif
+            % if part.manufacturer.url:
+                <p class="text-center" style="margin-top:20px">
+                    <a href="${part.manufacturer.url}" target="_blank">${part.manufacturer.url}</a>
+                </p>
+            % endif
         </div>
     </div>
 % endif
