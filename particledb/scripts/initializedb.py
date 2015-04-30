@@ -45,6 +45,12 @@ def create_models():
     cypress = Manufacturer(name='Cypress', logo_image=cypress_logo)
     yield cypress
     
+    ## Lite-On
+    liteon_logo = Image(path='manufacturers/liteon.png', alt="Lite-On logo")
+    yield liteon_logo
+    liteon = Manufacturer(name='Lite-On', logo_image=liteon_logo)
+    yield liteon
+    
     ## Parts
     yield Part(mpn="TEST123", description="Simple test component", manufacturer=maxim)
     yield Part(mpn="TEST345", description="Another test component", manufacturer=ti)

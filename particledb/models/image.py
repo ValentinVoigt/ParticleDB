@@ -10,5 +10,5 @@ class Image(Base):
     __tablename__ = 'images'
 
     id = Column('id', Integer, primary_key=True)
-    path = Column('mpn', String(255), unique=True, nullable=False)
+    path = Column('path', String(255), unique=True, nullable=False)
     alt = Column('alt', String(255))
