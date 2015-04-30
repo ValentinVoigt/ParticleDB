@@ -3,6 +3,8 @@
 <%namespace file="functions/pagination.mak" import="paginate" />
 <%namespace file="functions/image.mak" import="make_image" />
 
+<%block name="title">Manufacturer list &mdash;</%block>
+
 <%block name="javascript">
     <script src="${request.static_url('particledb:static/js/edit_manufacturers.js')}"></script>
 </%block>

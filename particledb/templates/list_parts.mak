@@ -2,6 +2,8 @@
 
 <%namespace file="functions/pagination.mak" import="paginate" />
 
+<%block name="title">Parts list &mdash;</%block>
+
 <h1 class="page-header">List of registered parts</h1>
 
 <div class="table-responsive">

@@ -6,6 +6,8 @@
     <script src="${request.static_url('particledb:static/js/remove_part.js')}"></script>
 </%block>
 
+<%block name="title">${part.mpn} &mdash;</%block>
+
 <h1 class="page-header">${part.mpn}</h1>
 
 % if part.manufacturer:

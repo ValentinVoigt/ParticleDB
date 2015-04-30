@@ -7,12 +7,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="">
-        <meta name="author" content="">
         <link rel="icon" href="${request.static_url('particledb:static/img/favicon.png')}">
 
-        <title>Particle</title>
+        <title>
+            <%block name="title" />
+            Particle
+        </title>
 
         <link href="${request.static_url('particledb:static/css/dist/bootstrap/bootstrap.min.css')}" rel="stylesheet">
         <link href="${request.static_url('particledb:static/css/dist/typeahead.js/theme.css')}" rel="stylesheet">

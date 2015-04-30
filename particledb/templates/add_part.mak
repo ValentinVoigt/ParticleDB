@@ -1,5 +1,7 @@
 <%inherit file="base.mak" />
 
+<%block name="title">Add part &mdash;</%block>
+
 <h1 class="page-header">Add part</h1>
 
 % if error:
