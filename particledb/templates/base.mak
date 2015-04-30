@@ -16,6 +16,7 @@
 
         <link href="${request.static_url('particledb:static/css/dist/bootstrap/bootstrap.min.css')}" rel="stylesheet">
         <link href="${request.static_url('particledb:static/css/dist/typeahead.js/theme.css')}" rel="stylesheet">
+        <link href="${request.static_url('particledb:static/css/dist/xeditable/bootstrap-editable.css')}" rel="stylesheet">
         <link href="${request.static_url('particledb:static/css/main.css')}" rel="stylesheet">
 
         <!--[if lt IE 9]>
@@ -68,9 +69,11 @@
         <script src="${request.static_url('particledb:static/js/dist/typeahead.js/typeahead.bundle.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootstrap/bootstrap.min.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootbox.js/bootbox.min.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/dist/xeditable/bootstrap-editable.min.js')}"></script>
         <script src="${request.static_url('particledb:static/js/search.js')}"></script>
         <%block name="javascript" />
         <script>
+            $.fn.editable.defaults.mode = 'inline';
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             });
