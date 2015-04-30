@@ -1,5 +1,5 @@
 var parts = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('mpn'),
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['mpn', 'desc']),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: js_globals.search_prefetch_url,
 });
