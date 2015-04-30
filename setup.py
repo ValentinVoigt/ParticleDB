@@ -15,6 +15,7 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'waitress',
+    'formencode',
     ]
 
 setup(name='ParticleDB',

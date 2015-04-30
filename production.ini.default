@@ -21,6 +21,11 @@ use = egg:waitress#main
 host = 0.0.0.0
 port = 6543
 
+# Mako settings
+mako.imports =
+     from particledb.utils.filters import nl2br
+mako.filters = nl2br
+
 ###
 # logging configuration
 # http://docs.pylonsproject.org/projects/pyramid/en/1.6-branch/narr/logging.html

@@ -21,7 +21,13 @@
                 <td>
                     <a href="${request.route_path("part", part_mpn=part.mpn)}">${part.mpn}</a>
                 </td>
-                <td>${part.manufacturer.name}</td>
+                <td>
+                % if part.manufacturer:
+                    ${part.manufacturer.name}
+                % else:
+                    <i>None</i>
+                % endif
+                </td>
                 <td>${part.description}</td>
             </tr>
             % endfor

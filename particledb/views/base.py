@@ -19,4 +19,7 @@ class BaseView:
             ('list_parts', 'List of parts', self.request.route_path('list_parts', page=1),),
             ('list_packages', 'List of packages', self.request.route_path('list_packages', page=1),),
             ('list_manufacturers', 'List of manufacturers', self.request.route_path('list_manufacturers', page=1),),
+            None,
+            "Administrative",
+            ('add_part', 'Add part', self.request.route_path('add_part'),),
         ]

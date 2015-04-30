@@ -4,13 +4,15 @@
 
 <h1 class="page-header">${part.mpn}</h1>
 
-<div class="panel panel-default pull-right">
-    <div class="panel-heading">
-        <h3 class="panel-title">${part.manufacturer.name}</h3>
+% if part.manufacturer:
+    <div class="panel panel-default pull-right">
+        <div class="panel-heading">
+            <h3 class="panel-title">${part.manufacturer.name}</h3>
+        </div>
+        <div class="panel-body">
+            ${make_image(part.manufacturer.logo_image)}
+        </div>
     </div>
-    <div class="panel-body">
-        ${make_image(part.manufacturer.logo_image)}
-    </div>
-</div>
+% endif
 
 <p>${part.description}</p>

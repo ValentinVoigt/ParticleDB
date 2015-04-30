@@ -58,11 +58,20 @@
             var js_globals = {
                 search_prefetch_url: "${request.route_path('search_prefetch')}",
                 search_dest_url: "${request.route_path('part', part_mpn="__mpn__")}",
+                add_part_url: "${request.route_path('add_part')}",
+                mpn_check_url: "${request.route_path('mpn_check')}",
+                manufacturers_prefetch_url: "${request.route_path('manufacturers_prefetch')}",
             };
         </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/typeahead.js/typeahead.bundle.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootstrap/bootstrap.min.js')}"></script>
         <script src="${request.static_url('particledb:static/js/search.js')}"></script>
+        <%block name="javascript" />
+        <script>
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
+        </script>
     </body>
 </html>

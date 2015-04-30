@@ -12,12 +12,18 @@ def main(global_config, **settings):
     config = Configurator(settings=settings)
     config.add_static_view('static', 'static', cache_max_age=3600)
 
+    ## Routes
     config.add_route('home', '/')
     config.add_route('list_parts', '/list/parts/{page}')
     config.add_route('list_packages', '/list/packages/{page}')
     config.add_route('list_manufacturers', '/list/manufacturers/{page}')
     config.add_route('part', '/parts/{part_mpn}')
-    config.add_route('search_prefetch', '/search-prefetch')
-
+    config.add_route('add_part', '/add/part')
+    
+    ## JSON API
+    config.add_route('search_prefetch', '/json/search-prefetch')
+    config.add_route('mpn_check', '/json/mpn-check')
+    config.add_route('manufacturers_prefetch', '/json/manufacturers-prefetch')
+    
     config.scan()
     return config.make_wsgi_app()
