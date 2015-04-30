@@ -59,3 +59,13 @@ class MPNCheckJsonView(BaseView):
         return [{
             'name': manufacturer.name,
         } for manufacturer in DBSession.query(Manufacturer).all()]
+
+    @view_config(
+        route_name='descriptions_prefetch',
+        renderer='json',
+        request_method='GET')
+    def description_prefetch(self):
+        return [{
+            'description': part.description,
+        } for part in DBSession.query(Part).all()]
+        

@@ -24,6 +24,7 @@ def main(global_config, **settings):
     config.add_route('search_prefetch', '/json/search-prefetch')
     config.add_route('mpn_check', '/json/mpn-check')
     config.add_route('manufacturers_prefetch', '/json/manufacturers-prefetch')
+    config.add_route('descriptions_prefetch', '/json/descriptions-prefetch')
     
     config.scan()
     return config.make_wsgi_app()

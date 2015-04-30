@@ -61,6 +61,7 @@
                 add_part_url: "${request.route_path('add_part')}",
                 mpn_check_url: "${request.route_path('mpn_check')}",
                 manufacturers_prefetch_url: "${request.route_path('manufacturers_prefetch')}",
+                descriptions_prefetch_url: "${request.route_path('descriptions_prefetch')}",
             };
         </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>

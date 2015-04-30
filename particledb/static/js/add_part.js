@@ -58,6 +58,17 @@ manufacturers.clear();
 manufacturers.clearPrefetchCache();
 manufacturers.initialize(true);
 
+var descriptions = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('description'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: js_globals.descriptions_prefetch_url,
+});
+ 
+// prevents caching
+descriptions.clear();
+descriptions.clearPrefetchCache();
+descriptions.initialize(true);
+
 $(function() {
     $("#mpn").blur(mpn_check_status);
     if ($("#mpn").val().length > 0) {
@@ -70,5 +81,9 @@ $(function() {
     $('#manufacturer').typeahead(null, {
         source: manufacturers,
         display: 'name',
+    });
+    $('#description').typeahead(null, {
+        source: descriptions,
+        display: 'description',
     });
 });
