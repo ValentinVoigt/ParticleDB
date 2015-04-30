@@ -67,6 +67,7 @@
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/typeahead.js/typeahead.bundle.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootstrap/bootstrap.min.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/dist/bootbox.js/bootbox.min.js')}"></script>
         <script src="${request.static_url('particledb:static/js/search.js')}"></script>
         <%block name="javascript" />
         <script>
