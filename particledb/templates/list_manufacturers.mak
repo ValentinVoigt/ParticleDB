@@ -17,9 +17,9 @@
         <tbody>
             % for manufacturer in pagination.current_dataset:
             <tr>
-                <td>${manufacturer.id}</td>
-                <td>${manufacturer.name}</td>
-                <td>${make_image(manufacturer.logo_image, height=35)}</td>
+                <td class="vert-align">${manufacturer.id}</td>
+                <td class="vert-align">${manufacturer.name}</td>
+                <td class="vert-align">${make_image(manufacturer.logo_image, height=35)}</td>
             </tr>
             % endfor
         </tbody>

@@ -111,3 +111,11 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+/*
+ * Tables with valign=middle
+ */
+ 
+.table tbody>tr>td.vert-align{
+    vertical-align: middle;
+}
