@@ -7,8 +7,15 @@ from sqlalchemy.orm.exc import NoResultFound
 @view_defaults(request_method='GET')       
 class PartView(BaseView):
 
-    nav_active = None
+    nav_active = 'list_parts'
 
+    def navigation_hook(self):
+        part = self.get_part()
+        self.navigation_add_after(
+            ('list_parts',),
+            ('part', part.mpn, self.request.route_path('part', part_mpn=part.mpn), 'indent')
+        )
+    
     def get_part(self):
         try:
             mpn = self.request.matchdict['part_mpn']

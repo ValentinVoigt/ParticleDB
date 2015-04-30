@@ -49,6 +49,13 @@ body {
   }
 }
 
+.nav-sidebar > .active-indent > a,
+.nav-sidebar > .active-indent > a:hover,
+.nav-sidebar > .active-indent > a:focus {
+    background-color: #fff;
+    color: #000;
+}
+
 /* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
