@@ -7,7 +7,7 @@
 % endif
 
 % if success:
-    <div class="alert alert-success" role="alert">New part has been added to the database! <a href="">Goto part</a></div>
+    <div class="alert alert-success" role="alert">New part has been added to the database! <a href="${request.route_path('part', part_mpn=new_part.mpn)}">Goto ${new_part.mpn}</a></div>
 % endif
 
 <p>Use this form to add a new part to the database. Go to <a href="#">Stock</a> to change items in stock!</p>
