@@ -11,5 +11,4 @@ from .package import Package
 from .parameter import Parameter
 from .part import Part
 
-
-__all__ = ['Image', 'Manufacturer', 'Package', 'Parameter', 'Part']
+__all__ = ['Base', 'DBSession', 'Image', 'Manufacturer', 'Package', 'Parameter', 'Part']
