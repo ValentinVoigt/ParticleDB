@@ -28,6 +28,7 @@ def main(global_config, **settings):
     config.add_route('manufacturers_edit', '/json/manufacturers-edit')
     config.add_route('descriptions_prefetch', '/json/descriptions-prefetch')
     config.add_route('parameter_remove', '/json/parameter-remove')
+    config.add_route('parameter_edit', '/json/parameter-edit')
     
     config.scan()
     return config.make_wsgi_app()

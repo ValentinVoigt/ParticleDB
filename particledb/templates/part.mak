@@ -37,12 +37,22 @@
             </button>
         </h3>
         <table class="table table-striped table-condensed">
+            <colgroup>
+                <col width="40%">
+                <col width="60%">
+            </colgroup>
             <tbody>
                 % for param in part.parameters:
                 <tr data-row-param-id="${param.id}">
-                    <td>${param.key}</td>
                     <td>
-                        ${param.value}
+                        <a href="#" class="editable-key" data-type="text" data-pk="${param.id}" data-url="${request.route_path('parameter_edit')}" data-title="Change key">
+                            ${param.key}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="editable-value" data-type="text" data-pk="${param.id}" data-url="${request.route_path('parameter_edit')}" data-title="Change value">
+                            ${param.value}
+                        </a>
                         <a href="#" class="text-danger pull-right remove-paramter hidden" data-id="${param.id}">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>

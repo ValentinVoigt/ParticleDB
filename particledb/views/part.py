@@ -51,4 +51,20 @@ class PartView(BaseView):
         DBSession.delete(parameter)
         return {}
 
-        
+    @view_config(
+        route_name='parameter_edit',
+        request_method='POST',
+        renderer='json')
+    def parameter_edit(self):
+        try:
+            id = self.request.POST.get('pk')
+            parameter = DBSession.query(Parameter).filter(Parameter.id==id).one()
+        except (IndexError, NoResultFound):
+            raise HTTPNotFound("Parameter not found")
+
+        col = self.request.POST.get('col')
+        if not col in ['key', 'value']:
+            raise HTTPBadRequest('Invalid column for data change')
+        setattr(parameter, col, self.request.POST.get('value'))
+
+        return {}
