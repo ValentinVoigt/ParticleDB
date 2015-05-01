@@ -4,6 +4,7 @@
 
 <%block name="javascript">
     <script src="${request.static_url('particledb:static/js/remove_part.js')}"></script>
+    <script src="${request.static_url('particledb:static/js/edit_parameter.js')}"></script>
 </%block>
 
 <%block name="title">${part.mpn} &mdash;</%block>
@@ -25,18 +26,17 @@
         <h3 class="page-header">Paramters</h3>
         <table class="table table-striped table-condensed">
             <tbody>
-                <tr>
-                    <td>foo</td>
-                    <td>bar</td>
+                % for param in part.parameters:
+                <tr data-row-param-id="${param.id}">
+                    <td>${param.key}</td>
+                    <td>
+                        ${param.value}
+                        <a href="#" class="text-danger pull-right remove-paramter" data-id="${param.id}">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </td>
                 </tr>
-                <tr>
-                    <td>foo</td>
-                    <td>bar</td>
-                </tr>
-                <tr>
-                    <td>foo</td>
-                    <td>bar</td>
-                </tr>
+                % endfor
                 <tr>
                     <td>
                         <input type="text">

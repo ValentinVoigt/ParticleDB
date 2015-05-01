@@ -1,5 +1,5 @@
 from pyramid.view import view_config, view_defaults
-from ..models import DBSession, Part
+from ..models import DBSession, Part, Parameter
 from .base import BaseView
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from sqlalchemy.orm.exc import NoResultFound
@@ -36,3 +36,19 @@ class PartView(BaseView):
         part = self.get_part()
         DBSession.delete(part)
         return HTTPFound(self.request.route_path("list_parts", page=1))
+
+    @view_config(
+        route_name='parameter_remove',
+        request_method='POST',
+        renderer='json')
+    def parameter_remove(self):
+        try:
+            id = self.request.POST.get('id')
+            parameter = DBSession.query(Parameter).filter(Parameter.id==id).one()
+        except (IndexError, NoResultFound):
+            raise HTTPNotFound("Parameter not found")
+
+        DBSession.delete(parameter)
+        return {}
+
+        
