@@ -18,4 +18,10 @@ $(function() {
             },
         });
     });
+    
+    $('#btn-edit').click(function() {
+        $(this).toggleClass('active');
+        $('.remove-paramter').toggleClass('hidden');
+        $('#btn-add-row').toggleClass('hidden');
+    });
 });

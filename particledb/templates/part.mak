@@ -11,19 +11,31 @@
 
 <h1 class="page-header">${part.mpn}</h1>
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        ${part.description}
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                ${part.description}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        % if part.manufacturer:
+            ${make_manufacturer(part.manufacturer)}
+        % endif
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h3 class="page-header">Stock</h3>
-        <p>None in stock</p>
-    </div>
-    <div class="col-md-4">
-        <h3 class="page-header">Paramters</h3>
+    <div class="col-md-6">
+        <h3 class="page-header">
+            Paramaters
+            <button type="button" class="btn btn-default btn-xs pull-right" id="btn-edit" aria-label="Edit">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                Edit
+            </button>
+        </h3>
         <table class="table table-striped table-condensed">
             <tbody>
                 % for param in part.parameters:
@@ -31,23 +43,15 @@
                     <td>${param.key}</td>
                     <td>
                         ${param.value}
-                        <a href="#" class="text-danger pull-right remove-paramter" data-id="${param.id}">
+                        <a href="#" class="text-danger pull-right remove-paramter hidden" data-id="${param.id}">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
                     </td>
                 </tr>
                 % endfor
-                <tr>
-                    <td>
-                        <input type="text">
-                    </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
+                <tr id="btn-add-row" class="hidden active">
                     <td colspan="2" class="text-right">
-                        <button type="button" class="btn btn-default btn-xs" aria-label="Add">
+                        <button type="button" class="btn btn-default btn-xs" id="btn-add" aria-label="Add">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             Add
                         </button>
@@ -56,10 +60,9 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-4">
-    % if part.manufacturer:
-        ${make_manufacturer(part.manufacturer)}
-    % endif
+    <div class="col-md-6">
+        <h3 class="page-header">Stock</h3>
+        <p>None in stock</p>
     </div>
 </div>
 
