@@ -8,7 +8,8 @@ Base = declarative_base()
 from .image import Image
 from .manufacturer import Manufacturer
 from .package import Package
+from .parameter import Parameter
 from .part import Part
 
 
-__all__ = ['Image', 'Manufacturer', 'Package', 'Part']
+__all__ = ['Image', 'Manufacturer', 'Package', 'Parameter', 'Part']
