@@ -1,6 +1,6 @@
 <%inherit file="base.mak" />
 
-<%namespace file="functions/image.mak" import="make_image" />
+<%namespace file="functions/manufacturer.mak" import="make_manufacturer" />
 
 <%block name="javascript">
     <script src="${request.static_url('particledb:static/js/remove_part.js')}"></script>
@@ -58,21 +58,7 @@
     </div>
     <div class="col-md-4">
     % if part.manufacturer:
-        <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <h3 class="panel-title">${part.manufacturer.name}</h3>
-            </div>
-            <div class="panel-body">
-                % if part.manufacturer.logo_image:
-                    ${make_image(part.manufacturer.logo_image, width=150)}
-                % endif
-            </div>
-            % if part.manufacturer.url:
-                <div class="panel-footer">
-                    <a href="${part.manufacturer.url}" target="_blank">${part.manufacturer.url}</a>
-                </div>
-            % endif
-        </div>
+        ${make_manufacturer(part.manufacturer)}
     % endif
     </div>
 </div>
