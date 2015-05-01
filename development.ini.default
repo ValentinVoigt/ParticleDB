@@ -26,6 +26,11 @@ mako.imports =
      from particledb.utils.filters import nl2br
 mako.filters = nl2br
 
+[pshell]
+m = particledb.models
+session = particledb.models.DBSession
+t = transaction
+
 ###
 # wsgi server configuration
 ###
