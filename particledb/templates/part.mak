@@ -30,7 +30,7 @@
 <div class="row">
     <div class="col-md-6">
         <h3 class="page-header">
-            Paramaters
+            Parameters
             <button type="button" class="btn btn-default btn-xs pull-right" id="btn-edit" aria-label="Edit">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Edit
