@@ -41,7 +41,13 @@
                         ${manufacturer.url if manufacturer.url else ''}
                     </a>
                 </td>
-                <td class="vert-align">${make_image(manufacturer.logo_image, height=35)}</td>
+                <td class="vert-align">
+                    % if manufacturer.logo_image:
+                        ${make_image(manufacturer.logo_image, height=35)}
+                    % else:
+                        <i style="line-height:35px">None</i>
+                    % endif
+                </td>
             </tr>
             % endfor
         </tbody>
