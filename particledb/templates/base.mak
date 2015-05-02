@@ -76,6 +76,7 @@
         <%block name="javascript" />
         <script>
             $.fn.editable.defaults.mode = 'inline';
+            $.fn.editable.defaults.onblur = 'submit';
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             });
