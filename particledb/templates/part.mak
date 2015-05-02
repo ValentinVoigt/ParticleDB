@@ -76,14 +76,16 @@
                     </td>
                 </tr>
                 % endfor
-                <tr id="btn-add-row" class="hidden active">
-                    <td colspan="2" class="text-right">
-                        <button type="button" class="btn btn-default btn-xs" id="btn-add" aria-label="Add">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            Add
-                        </button>
-                    </td>
-                </tr>
+                <tfoot>
+                    <tr id="btn-add-row" class="hidden active">
+                        <td colspan="2" class="text-right">
+                            <button type="button" class="btn btn-default btn-xs" id="btn-add" aria-label="Add">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                Add
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
             </tbody>
         </table>
     </div>
