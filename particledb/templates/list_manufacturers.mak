@@ -13,6 +13,12 @@
 
 <div class="table-responsive">
     <table class="table table-striped">
+        <colgroup>
+            <col style="width:3%">
+            <col style="width:35%">
+            <col style="width:40%">
+            <col style="width:22%">
+        </colgroup>
         <thead>
             <tr>
                 <th>#</th>
