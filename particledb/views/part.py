@@ -1,7 +1,7 @@
 from pyramid.view import view_config, view_defaults
 from ..models import DBSession, Part, Parameter
 from .base import BaseView
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound
+from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPBadRequest
 from sqlalchemy.orm.exc import NoResultFound
 
 @view_defaults(request_method='GET')       
@@ -96,3 +96,30 @@ class PartView(BaseView):
         DBSession.refresh(parameter)
         
         return {'id': parameter.id}
+        
+        
+    @view_config(
+        route_name='parameter_reorder',
+        request_method='POST',
+        renderer='json')
+    def parameter_reorder(self):
+        try:
+            id = self.request.POST.get('part')
+            part = DBSession.query(Part).get(id)
+        except (IndexError, NoResultFound):
+            raise HTTPNotFound("Parameter not found")
+        
+        try:
+            order = [int(i) for i in self.request.POST.get('order', '').split(',')]
+        except ValueError:
+            raise HTTPBadRequest('Given order list does contain non-numeric values')
+
+        mymap = dict([(p.id, p) for p in part.parameters])
+        
+        if set(order) != set(mymap.keys()):
+            raise HTTPBadRequest('Given order list does not match parameters')
+        
+        for i in range(0, len(part.parameters)):
+            mymap[order[i]].order = i
+        
+        return {}

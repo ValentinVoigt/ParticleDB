@@ -5,6 +5,7 @@
 <%block name="javascript">
     <script src="${request.static_url('particledb:static/js/remove_part.js')}"></script>
     <script src="${request.static_url('particledb:static/js/edit_parameter.js')}"></script>
+    <script src="${request.static_url('particledb:static/js/dist/html5sortable/html.sortable.min.js')}"></script>
 </%block>
 
 <%block name="title">${part.mpn} &mdash;</%block>
@@ -45,6 +46,7 @@
                 <!-- Template for new entries. Copied by JavaScript -->
                 <tr class="hidden" id="new-parameter-template">
                     <td>
+                        <span class="glyphicon glyphicon-sort hidden parameter-sort text-muted" aria-hidden="true"></span>
                         <a href="#" class="editable" data-type="text" data-url="${request.route_path('parameter_edit')}" data-title="Change key"></a>
                     </td>
                     <td>
@@ -55,10 +57,11 @@
                     </td>
                 </tr>
                 <!-- Dummy row to restore even table striping -->
-                <tr class="hidden"><td colspan="2"></td></tr>
+                <tr class="hidden" id="dummy-parameter"><td colspan="2"></td></tr>
                 % for param in part.parameters:
                 <tr data-row-param-id="${param.id}">
                     <td>
+                        <span class="glyphicon glyphicon-sort hidden parameter-sort" aria-hidden="true"></span>
                         <a href="#" class="editable editable-key" data-type="text" data-pk="${param.id}" data-url="${request.route_path('parameter_edit')}" data-title="Change key">
                             ${param.key}
                         </a>

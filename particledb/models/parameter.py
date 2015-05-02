@@ -11,6 +11,7 @@ class Parameter(Base):
     id = Column('id', Integer, primary_key=True)
     key = Column('key', String(255), nullable=False)
     value = Column('value', String(255), nullable=False)
+    order = Column('order_', Integer)
 
     parts_id  = Column('parts_id', Integer, ForeignKey('parts.id'), nullable=False)
-    part = relationship("Part", backref="parameters")
+    part = relationship("Part")

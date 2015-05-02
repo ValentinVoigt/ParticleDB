@@ -12,3 +12,4 @@ class Part(Base):
     mpn = Column('mpn', String(45), unique=True, nullable=False)
     description = Column('description', String(45))
     manufacturers_id  = Column('manufacturers_id', Integer, ForeignKey('manufacturers.id'))
+    parameters = relationship("Parameter", order_by="Parameter.order")

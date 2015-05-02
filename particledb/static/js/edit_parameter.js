@@ -56,6 +56,8 @@ function check_if_both_are_filled(e, reason) {
                     editables.removeClass('editable-unsaved').off('hidden.add_new').editable('option', 'pk', data.id);
                     $(this).closest('tr').find('a.remove-parameter').attr('data-id', data.id);
                     $(this).closest('tr').removeClass('empty-parameter').attr('data-row-param-id', data.id);
+                    $('#table-parameters tbody').sortable('reload');
+                    $(this).closest('tr').find('.parameter-sort').removeClass('text-muted');
                 } else {
                     // TODO
                     $(this).closest('tr').addClass('danger');
@@ -65,17 +67,33 @@ function check_if_both_are_filled(e, reason) {
     }
 }
 
+function save_parameter_order() {
+    var order = [];
+    $('tr[data-row-param-id]').each(function() {
+        order.push($(this).attr('data-row-param-id'));
+    });
+
+    var jqxhr = $.ajax({
+        url: js_globals.parameter_reorder_url,
+        method: "POST",
+        data: {part: $('table[data-part-id]').data('part-id'), order: order.join()},
+        dataType: "json",
+    });
+}
+
 $(function() {
     $('.remove-parameter').click(on_remove_parameter_click);
     
     $('#btn-edit').click(function() {
         $(this).toggleClass('active');
-        $('.remove-parameter').toggleClass('hidden');
-        $('#btn-add-row').toggleClass('hidden');
+        $('.remove-parameter, .parameter-sort, #btn-add-row').toggleClass('hidden');
         $('.editable-key, .editable-value').editable('toggleDisabled');
         
-        if (!$(this).hasClass('active')) {
+        if ($(this).hasClass('active')) {
+            $("#table-parameters tbody").sortable('enable');
+        } else {
             $('.empty-parameter').remove();
+            $("#table-parameters tbody").sortable('disable');
         }
     });
     
@@ -90,6 +108,15 @@ $(function() {
         template.find('.editable-key').on('hidden.add_new', check_if_both_are_filled);
         template.find('.editable-value').on('hidden.add_new', check_if_both_are_filled);
         $('#table-parameters tr:last').before(template);
+    });
+    
+    $("#table-parameters tbody").sortable({
+        sortableClass: 'info',
+        forcePlaceholderSize: true,
+        handle: 'span.parameter-sort',
+        items: 'tr:not(#new-parameter-template,#dummy-parameter,#btn-add-row)',
+    }).sortable('disable').bind('sortupdate', function(e, ui) {
+        save_parameter_order();
     });
     
     setup_parameter_editable($('.editable-key'), 'key').editable('toggleDisabled');

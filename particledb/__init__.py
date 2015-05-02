@@ -30,6 +30,7 @@ def main(global_config, **settings):
     config.add_route('parameter_remove', '/json/parameter-remove')
     config.add_route('parameter_edit', '/json/parameter-edit')
     config.add_route('parameter_add', '/json/parameter-add')
+    config.add_route('parameter_reorder', '/json/parameter-reorder')
     
     config.scan()
     return config.make_wsgi_app()

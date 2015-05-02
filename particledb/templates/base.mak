@@ -65,6 +65,7 @@
                 descriptions_prefetch_url: "${request.route_path('descriptions_prefetch')}",
                 parameter_remove_url: "${request.route_path('parameter_remove')}",
                 parameter_add_url: "${request.route_path('parameter_add')}",
+                parameter_reorder_url: "${request.route_path('parameter_reorder')}",
             };
         </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>
