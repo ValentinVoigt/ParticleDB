@@ -21,7 +21,7 @@
         </colgroup>
         <thead>
             <tr>
-                <th>#</th>
+                <th class="text-center">#</th>
                 <th>Manufacturer name</th>
                 <th>URL</th>
                 <th>Logo</th>
@@ -30,7 +30,7 @@
         <tbody>
             % for manufacturer in pagination.current_dataset:
             <tr>
-                <td class="vert-align">${manufacturer.id}</td>
+                <td class="vert-align text-center">${manufacturer.id}</td>
                 <td class="vert-align">
                     <a href="#" class="editable-name" data-type="text" data-name="name" data-pk="${manufacturer.id}" data-url="${request.route_path('manufacturers_edit')}" data-title="Enter name">
                         ${manufacturer.name}
