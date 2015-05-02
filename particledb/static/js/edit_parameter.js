@@ -1,4 +1,12 @@
 function setup_parameter_editable(editable, key_or_value) {
+    if (key_or_value == 'key') {
+        editable.on('hidden.nextfield', function(event, reason) {
+            if (reason == 'save') {
+                $(this).closest('td').next().find('.editable').editable('show');
+            }
+        });
+    }
+
     return editable.editable({
         name: key_or_value,
     });
