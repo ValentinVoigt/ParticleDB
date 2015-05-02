@@ -56,15 +56,43 @@ class PartView(BaseView):
         request_method='POST',
         renderer='json')
     def parameter_edit(self):
+        id = self.request.POST.get('pk', '')
+        
         try:
-            id = self.request.POST.get('pk')
-            parameter = DBSession.query(Parameter).filter(Parameter.id==id).one()
+            parameter = DBSession.query(Parameter).get(id)
         except (IndexError, NoResultFound):
             raise HTTPNotFound("Parameter not found")
 
-        col = self.request.POST.get('col')
+        col = self.request.POST.get('name')
         if not col in ['key', 'value']:
             raise HTTPBadRequest('Invalid column for data change')
         setattr(parameter, col, self.request.POST.get('value'))
 
         return {}
+        
+    @view_config(
+        route_name='parameter_add',
+        request_method='POST',
+        renderer='json')
+    def parameter_add(self):
+        try:
+            id = self.request.POST.get('part')
+            part = DBSession.query(Part).get(id)
+        except (IndexError, NoResultFound):
+            raise HTTPNotFound("Parameter not found")
+        
+        key = self.request.POST.get('key', '')
+        value = self.request.POST.get('value', '')
+        
+        if len(key) == 0 or len(value) == 0:
+            raise HTTPBadRequest('Parameters must no be empty')
+        
+        parameter = Parameter(key=key, value=value)
+        part.parameters.append(parameter)
+        
+        # to obtain the new generated id
+        DBSession.add(parameter)
+        DBSession.flush()
+        DBSession.refresh(parameter)
+        
+        return {'id': parameter.id}

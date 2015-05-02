@@ -36,24 +36,38 @@
                 Edit
             </button>
         </h3>
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped table-condensed" id="table-parameters" data-part-id="${part.id}">
             <colgroup>
                 <col width="40%">
                 <col width="60%">
             </colgroup>
             <tbody>
+                <!-- Template for new entries. Copied by JavaScript -->
+                <tr class="hidden" id="new-parameter-template">
+                    <td>
+                        <a href="#" class="editable" data-type="text" data-url="${request.route_path('parameter_edit')}" data-title="Change key"></a>
+                    </td>
+                    <td>
+                        <a href="#" class="editable" data-type="text" data-url="${request.route_path('parameter_edit')}" data-title="Change value"></a>
+                        <a href="#" class="text-danger pull-right remove-parameter hidden">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+                <!-- Dummy row to restore even table striping -->
+                <tr class="hidden"><td colspan="2"></td></tr>
                 % for param in part.parameters:
                 <tr data-row-param-id="${param.id}">
                     <td>
-                        <a href="#" class="editable-key" data-type="text" data-pk="${param.id}" data-url="${request.route_path('parameter_edit')}" data-title="Change key">
+                        <a href="#" class="editable editable-key" data-type="text" data-pk="${param.id}" data-url="${request.route_path('parameter_edit')}" data-title="Change key">
                             ${param.key}
                         </a>
                     </td>
                     <td>
-                        <a href="#" class="editable-value" data-type="text" data-pk="${param.id}" data-url="${request.route_path('parameter_edit')}" data-title="Change value">
+                        <a href="#" class="editable editable-value" data-type="text" data-pk="${param.id}" data-url="${request.route_path('parameter_edit')}" data-title="Change value">
                             ${param.value}
                         </a>
-                        <a href="#" class="text-danger pull-right remove-paramter hidden" data-id="${param.id}">
+                        <a href="#" class="text-danger pull-right remove-parameter hidden" data-id="${param.id}">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
                     </td>
