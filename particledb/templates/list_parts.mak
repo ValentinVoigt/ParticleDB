@@ -4,7 +4,14 @@
 
 <%block name="title">Parts list &mdash;</%block>
 
-<h1 class="page-header">List of registered parts</h1>
+<h1 class="page-header">
+    List of registered parts
+    <a href="${request.route_path('add_part')}">
+        <button type="button" class="btn btn-default pull-right">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add part
+        </button>
+    </a>
+</h1>
 
 <div class="table-responsive">
     <table class="table table-striped">
