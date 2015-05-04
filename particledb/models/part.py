@@ -13,3 +13,4 @@ class Part(Base):
     description = Column('description', String(45))
     manufacturers_id  = Column('manufacturers_id', Integer, ForeignKey('manufacturers.id'))
     parameters = relationship("Parameter", order_by="Parameter.order")
+    stocks = relationship("Stock", backref="part")

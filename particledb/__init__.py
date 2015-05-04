@@ -20,6 +20,7 @@ def main(global_config, **settings):
     config.add_route('part', '/parts/{part_mpn}')
     config.add_route('add_part', '/add/part')
     config.add_route('remove_part', '/parts/{part_mpn}/remove')
+    config.add_route('storage', '/storage')
     
     ## JSON API
     config.add_route('search_prefetch', '/json/search-prefetch')

@@ -12,3 +12,4 @@ class Package(Base):
     name = Column('name', String(45), nullable=False)
     pins = Column('pins', Integer, nullable=False)
     picture = Column('description', String(45))
+    stocks = relationship("Stock", backref="package")

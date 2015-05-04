@@ -22,6 +22,7 @@ class BaseView:
             None,
             "Administrative",
             ('add_part', 'Add part', self.request.route_path('add_part'),),
+            ('storage', 'Storage', self.request.route_path('storage'),),
         ]
 
         self.navigation_hook()
