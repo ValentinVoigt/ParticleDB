@@ -1,6 +1,7 @@
 from pyramid.view import view_config, view_defaults
+from sqlalchemy.orm import subqueryload
 
-from ..models import DBSession, Storage
+from ..models import DBSession, Storage, StorageCell
 
 from .base import BaseView
 
@@ -13,5 +14,7 @@ class StorageView(BaseView):
         route_name='storage',
         renderer='particledb:templates/storage.mak')
     def storage(self):
-        storages = DBSession.query(Storage).all()
+        storages = DBSession.query(Storage)
+        storages = storages.options(subqueryload('cells').subqueryload('stocks'))
+        storages = storages.all()
         return {'storages': storages}
