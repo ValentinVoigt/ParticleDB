@@ -91,7 +91,34 @@
     </div>
     <div class="col-md-6">
         <h3 class="page-header">Stock</h3>
-        <p>None in stock</p>
+        <table class="table table-striped table-condensed" id="table-parameters" data-part-id="${part.id}">
+            <thead>
+                <tr>
+                    <th>Storage</th>
+                    <th>Cell</th>
+                    <th>Quantity</th>
+                    <th>Package</th>
+                </tr>
+            </thead>
+            <tbody>
+                % if len(part.stocks) == 0:
+                    <td colspan="4" class="text-center">None in stock</td>
+                % else:
+                    % for stock in part.stocks: 
+                    <tr>
+                        <td>${stock.cell.storage.name}</td>
+                        <td>${stock.cell.number}</td>
+                        <td>${stock.quantity}</td>
+                        % if stock.package:
+                            <td>${stock.package.name}</td>
+                        % else:
+                            <td>&mdash;</td>
+                        % endif
+                    </tr>
+                    % endfor
+                % endif
+            </tbody>
+        </table>
     </div>
 </div>
 

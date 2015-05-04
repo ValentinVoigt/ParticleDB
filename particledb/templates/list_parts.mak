@@ -19,6 +19,7 @@
             <tr>
                 <th>#</th>
                 <th>MPN</th>
+                <th>Avail.</th>
                 <th>Manufacturer</th>
                 <th>Description</th>
             </tr>
@@ -29,6 +30,9 @@
                 <td>${part.id}</td>
                 <td>
                     <a href="${request.route_path("part", part_mpn=part.mpn)}">${part.mpn}</a>
+                </td>
+                <td>
+                    ${sum([i.quantity for i in part.stocks])}
                 </td>
                 <td>
                 % if part.manufacturer:

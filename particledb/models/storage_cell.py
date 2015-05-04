@@ -11,4 +11,4 @@ class StorageCell(Base):
     id = Column('id', Integer, primary_key=True)
     number = Column('number', Integer, nullable=False)
     storage_id  = Column('storage_id', Integer, ForeignKey('storages.id'))
-    stocks = relationship("Stock", backref="storage_cell")
+    stocks = relationship("Stock", backref="cell")
