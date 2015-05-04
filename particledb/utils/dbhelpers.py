@@ -7,7 +7,7 @@ def return_or_404(obj, details=""):
     if details:
         details = " (%s)" % details
     if obj is None:
-        raise HTTPNotFound("%s not found%s" % (cls.__class__.__name__, details))
+        raise HTTPNotFound("%s not found%s" % (obj.__class__.__name__, details))
     return obj
 
 def get_or_404(cls, *args):
