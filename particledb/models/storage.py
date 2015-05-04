@@ -23,9 +23,9 @@ class Storage(Base):
         def iter_cells(self):
             for col in range(0, self.storage.width):
                 number = self.row * self.storage.width + col + 1
-                yield self.storage._get_cell_by_number(number)
+                yield self.storage.get_cell(number)
     
-    def _get_cell_by_number(self, number):
+    def get_cell(self, number):
         try:
             return list(filter(lambda x: x.number == number, self.cells))[0]
         except IndexError as e:
