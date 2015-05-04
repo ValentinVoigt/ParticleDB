@@ -44,7 +44,9 @@ class MPNCheckJsonView(BaseView):
         renderer='json',
         request_method='POST')
     def mpn_check(self):
-        mpn = self.request.POST.get("mpn")
+        mpn = self.request.POST.get("mpn", "")
+        if len(mpn) == 0:
+            return {'available': 0}
         count = DBSession.query(Part.id).filter(Part.mpn==mpn).count()
         available = 1 if count == 0 else 0
         return {'available': available}
