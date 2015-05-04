@@ -16,39 +16,38 @@
     </button>
 </h1>
 
-<div class="row">
-    % for storage in storages:
-    <div class="col-md-4 col-sm-6">
-        <div class="panel panel-default panel-primary">
-            <div class="panel-heading">
-                ${storage.name}
-                % if storage.is_empty:
-                    <form action="${request.route_path('storage_remove')}" method="POST" class="pull-right">
-                        <input type="hidden" name="id" value="${storage.id}">
-                        <a href="#" class="remove-storage" style="color:white">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </a>
-                    </form>
-                % endif
-            </div>
-            <table class="table table-bordered">
-                % for row in storage.iter_rows():
-                <tr>
-                    % for cell in row.iter_cells():
-                    <td class="text-center">
-                        % if len(cell.stocks) > 0:
-                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-                        % endif
-                        ${cell.number}
-                    </td>
-                    % endfor
-                </tr>
-                % endfor
-            </table>
+% for storage in storages:
+<div class="pull-left" style="margin:0 30px 30px 0">
+    <div class="panel panel-default panel-primary">
+        <div class="panel-heading">
+            ${storage.name}
+            % if storage.is_empty:
+                <form action="${request.route_path('storage_remove')}" method="POST" class="pull-right">
+                    <input type="hidden" name="id" value="${storage.id}">
+                    <a href="#" class="remove-storage" style="color:white">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                </form>
+            % endif
         </div>
+        <table class="table table-bordered">
+            % for row in storage.iter_rows():
+            <tr>
+                % for cell in row.iter_cells():
+                <td class="vert-align text-center
+                    % if len(cell.stocks) > 0:
+                        info
+                    % endif
+                " style="width:45px; height:40px;">
+                    ${cell.number}
+                </td>
+                % endfor
+            </tr>
+            % endfor
+        </table>
     </div>
-    % endfor
 </div>
+% endfor
 
 <%def name="make_add_storage_form()">
     <p>You can add a new storage container here.</p>
