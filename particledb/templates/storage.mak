@@ -22,12 +22,14 @@
         <div class="panel panel-default panel-primary">
             <div class="panel-heading">
                 ${storage.name}
-                <form action="${request.route_path('storage_remove')}" method="POST" class="pull-right">
-                    <input type="hidden" name="id" value="${storage.id}">
-                    <a href="#" class="remove-storage" style="color:white">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </a>
-                </form>
+                % if storage.is_empty:
+                    <form action="${request.route_path('storage_remove')}" method="POST" class="pull-right">
+                        <input type="hidden" name="id" value="${storage.id}">
+                        <a href="#" class="remove-storage" style="color:white">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </form>
+                % endif
             </div>
             <table class="table table-bordered">
                 % for row in storage.iter_rows():

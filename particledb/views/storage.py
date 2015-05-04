@@ -1,5 +1,5 @@
 from pyramid.view import view_config, view_defaults
-from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPFound, HTTPBadRequest
 from sqlalchemy.orm import subqueryload
 from formencode.api import Invalid
 
@@ -45,5 +45,7 @@ class StorageJsonViews(BaseView):
         route_name='storage_remove')
     def storage_remove(self):
         storage = get_or_404(Storage, self.request.POST.get('id'))
+        if not storage.is_empty:
+            return HTTPBadRequest("Storage is not empty")
         DBSession.delete(storage)
         return HTTPFound(self.request.route_path("storage"))

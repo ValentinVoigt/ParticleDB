@@ -36,3 +36,11 @@ class Storage(Base):
     def iter_rows(self):
         for row in range(0, self.height):
             yield Storage.Row(storage=self, row=row)
+
+    @property
+    def is_empty(self):
+        for cell in self.cells:
+            if len(cell.stocks) > 0:
+                return False
+        return True
+            
