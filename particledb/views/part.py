@@ -1,8 +1,11 @@
 from pyramid.view import view_config, view_defaults
+from pyramid.httpexceptions import HTTPFound, HTTPBadRequest
+from pyramid.decorator import reify
+from sqlalchemy.orm.exc import NoResultFound
+
 from ..models import DBSession, Part, Parameter
 from .base import BaseView
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPBadRequest
-from sqlalchemy.orm.exc import NoResultFound
+from ..utils.dbhelpers import get_by_or_404, get_or_404
 
 @view_defaults(request_method='GET')       
 class PartView(BaseView):
@@ -10,31 +13,27 @@ class PartView(BaseView):
     nav_active = 'list_parts'
 
     def navigation_hook(self):
-        part = self.get_part()
+        part = self.part
         self.navigation_add_after(
             ('list_parts',),
             ('part', part.mpn, self.request.route_path('part', part_mpn=part.mpn), 'indent')
         )
-    
-    def get_part(self):
-        try:
-            mpn = self.request.matchdict['part_mpn']
-            return DBSession.query(Part).filter(Part.mpn==mpn).one()
-        except (IndexError, NoResultFound):
-            raise HTTPNotFound("Part not found")
+
+    @reify
+    def part(self):
+        return get_by_or_404(Part, mpn=self.request.matchdict.get('part_mpn'))
 
     @view_config(
         route_name='part',
         renderer='particledb:templates/part.mak')
-    def part(self):
-        return {'part': self.get_part()}
+    def show_part(self):
+        return {'part': self.part}
 
     @view_config(
         route_name='remove_part',
         request_method='POST')
     def remove_part(self):
-        part = self.get_part()
-        DBSession.delete(part)
+        DBSession.delete(self.part)
         return HTTPFound(self.request.route_path("list_parts", page=1))
 
     @view_config(
@@ -42,12 +41,8 @@ class PartView(BaseView):
         request_method='POST',
         renderer='json')
     def parameter_remove(self):
-        try:
-            id = self.request.POST.get('id')
-            parameter = DBSession.query(Parameter).filter(Parameter.id==id).one()
-        except (IndexError, NoResultFound):
-            raise HTTPNotFound("Parameter not found")
-
+        id = self.request.POST.get('id')
+        parameter = get_or_404(Parameter, id)
         DBSession.delete(parameter)
         return {}
 
@@ -57,11 +52,7 @@ class PartView(BaseView):
         renderer='json')
     def parameter_edit(self):
         id = self.request.POST.get('pk', '')
-        
-        try:
-            parameter = DBSession.query(Parameter).get(id)
-        except (IndexError, NoResultFound):
-            raise HTTPNotFound("Parameter not found")
+        parameter = get_or_404(Parameter, id)
 
         col = self.request.POST.get('name')
         if not col in ['key', 'value']:
@@ -75,12 +66,7 @@ class PartView(BaseView):
         request_method='POST',
         renderer='json')
     def parameter_add(self):
-        try:
-            id = self.request.POST.get('part')
-            part = DBSession.query(Part).get(id)
-        except (IndexError, NoResultFound):
-            raise HTTPNotFound("Parameter not found")
-        
+        part = get_or_404(Part, self.request.POST.get('part'))
         key = self.request.POST.get('key', '')
         value = self.request.POST.get('value', '')
         
@@ -97,17 +83,12 @@ class PartView(BaseView):
         
         return {'id': parameter.id}
         
-        
     @view_config(
         route_name='parameter_reorder',
         request_method='POST',
         renderer='json')
     def parameter_reorder(self):
-        try:
-            id = self.request.POST.get('part')
-            part = DBSession.query(Part).get(id)
-        except (IndexError, NoResultFound):
-            raise HTTPNotFound("Parameter not found")
+        part = get_or_404(Part, self.request.POST.get('part'))
         
         try:
             order = [int(i) for i in self.request.POST.get('order', '').split(',')]

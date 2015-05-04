@@ -1,10 +1,11 @@
 from pyramid.view import view_config, view_defaults
 from formencode import validators
 from formencode.api import Invalid
-from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
+from pyramid.httpexceptions import HTTPBadRequest
 
 from ..models import DBSession, Manufacturer
 from ..schemas.add_part import AddPartSchema
+from ..utils.dbhelpers import get_or_404
 from .base import BaseView
 
 class ManufacturersEditView(BaseView):
@@ -14,13 +15,8 @@ class ManufacturersEditView(BaseView):
         renderer='json',
         request_method='POST')
     def manufacturers_edit(self):
-        ## Get Manufacturer
-        manufacturer_id = int(self.request.POST.get('pk', -1))
-        manufacturer = DBSession.query(Manufacturer).get(manufacturer_id)
-        if not manufacturer:
-            raise HTTPNotFound('Manufacturer not found')
+        manufacturer = get_or_404(Manufacturer, self.request.POST.get('pk'))
             
-        ## Edit manufacturer
         if self.request.POST.get('name') == 'name':
             manufacturer.name = self.request.POST.get('value')
             return {'value': manufacturer.name}
