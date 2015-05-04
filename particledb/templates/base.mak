@@ -38,7 +38,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-left" id="search">
-                        <input type="text" class="form-control typeahead" placeholder="Search...">
+                        <input type="text" class="form-control typeahead" id="globalsearchinput" placeholder="Search...">
                     </form>
                 </div>
             </div>
@@ -71,6 +71,7 @@
             };
         </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/dist/jquery.hotkeys.js/jquery.hotkeys.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/typeahead.js/typeahead.bundle.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootstrap/bootstrap.min.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootbox.js/bootbox.min.js')}"></script>
@@ -82,6 +83,9 @@
             $.fn.editable.defaults.onblur = 'submit';
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
+            });
+            $(document).bind('keypress', 'f', function() {
+                $('#globalsearchinput').focus();
             });
         </script>
     </body>
