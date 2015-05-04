@@ -3,7 +3,7 @@
 ## <%namespace file="functions/manufacturer.mak" import="make_manufacturer" />
 
 <%block name="javascript">
-    <script src="${request.static_url('particledb:static/js/add_storage.js')}"></script>
+    <script src="${request.static_url('particledb:static/js/storage.js')}"></script>
 </%block>
 
 <%block name="title">Storage &mdash;</%block>
@@ -20,7 +20,15 @@
     % for storage in storages:
     <div class="col-md-4 col-sm-6">
         <div class="panel panel-default panel-primary">
-            <div class="panel-heading">${storage.name}</div>
+            <div class="panel-heading">
+                ${storage.name}
+                <form action="${request.route_path('storage_remove')}" method="POST" class="pull-right">
+                    <input type="hidden" name="id" value="${storage.id}">
+                    <a href="#" class="remove-storage" style="color:white">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                </form>
+            </div>
             <table class="table table-bordered">
                 % for row in storage.iter_rows():
                 <tr>

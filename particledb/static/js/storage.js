@@ -74,6 +74,24 @@ function on_btn_save_click() {
     }
 }
 
+function on_remove_storage_click() {
+    var that = $(this);
+
+    bootbox.confirm({
+        message: "Do you really want to delete this storage container?",
+        size: 'small',
+        callback: function(result) {
+            if (result) {
+                that.closest('form').submit();
+            }
+        },
+    });
+
+    /* prevent scrolling */
+    return false;
+}
+
 $(function() {
     $('#btn-save').click(on_btn_save_click);
+    $('.remove-storage').click(on_remove_storage_click);
 });
