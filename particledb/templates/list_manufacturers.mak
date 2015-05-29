@@ -50,6 +50,11 @@
                 </td>
             </tr>
             % endfor
+			% if pagination.is_empty:
+                <tr>
+                    <td colspan="4" class="emptyrow">none</td>
+                </tr>
+            % endif
         </tbody>
     </table>
 </div>

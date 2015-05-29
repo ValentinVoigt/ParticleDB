@@ -55,6 +55,12 @@ class Pagination(object):
         return self.dataset.offset((self.page - 1) * self.per_page).limit(self.per_page)
 
     @property
+    def is_empty(self):
+        """ Returns true, if dataset is empty. False otherwise.
+        """
+        return self.total == 0
+
+    @property
     def iterator(self):
         """ Iterate over this property to get all available page numbers as int.
         """

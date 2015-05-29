@@ -44,6 +44,11 @@
                 <td>${part.description}</td>
             </tr>
             % endfor
+			% if pagination.is_empty:
+                <tr>
+                    <td colspan="5" class="emptyrow">none</td>
+                </tr>
+            % endif
         </tbody>
     </table>
 </div>
