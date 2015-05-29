@@ -49,6 +49,13 @@
 </div>
 % endfor
 
+% if len(storages) == 0:
+<div class="alert alert-info" role="alert">
+    <strong>No storage added yet!</strong>
+    Use <i>Add</i> button above to add a new storage container.
+</div>
+% endif
+
 <%def name="make_add_storage_form()">
     <p>You can add a new storage container here.</p>
     <p>Storage containers a 2-dimensional. They have a width and a height. </p>
