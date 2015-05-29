@@ -68,6 +68,7 @@
                 parameter_reorder_url: "${request.route_path('parameter_reorder')}",
                 storage_add_url: "${request.route_path('storage_add')}",
                 storage_url: "${request.route_path('storage')}",
+                delete_file_url: "${request.route_path('delete_file')}",
             };
         </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>

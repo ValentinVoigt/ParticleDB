@@ -4,6 +4,7 @@ from . import Base
 
 import os
 import magic
+import math
 
 class UploadedFile(Base):
     """ Represents an uploaded file.
@@ -45,8 +46,20 @@ class UploadedFile(Base):
         full_path = os.path.join(uploads, self.uuid)
         return full_path
         
-    def delete(self, request):
+    def delete(self, request, ignore_missing=False):
         """ Deletes file on disk.
         Instance must be removed from session manually.
         """
-        os.remove(self.get_full_path(request))
+        try:
+            os.remove(self.get_full_path(request))
+        except FileNotFoundError as e:
+            if not ignore_missing:
+                raise e
+        
+    @property
+    def formatted_size(self):
+        units = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+        unit = math.floor(math.log(self.size, 1024))
+        if unit > len(units) - 1:
+            unit = len(units) - 1
+        return "%0.2f %s" % (self.size / math.pow(1024, unit), units[unit])

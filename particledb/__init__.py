@@ -27,7 +27,9 @@ def main(global_config, **settings):
     
     ## Uploads
     config.add_route('upload_logo', '/upload/logo/{manufacturer_id}')
+    config.add_route('upload_file', '/upload/file/{part_id}')
     config.add_route('uploaded_file', '/uploads/{uuid}')
+    config.add_route('delete_file', '/upload/delete')
     
     ## JSON API
     config.add_route('search_prefetch', '/json/search-prefetch')
