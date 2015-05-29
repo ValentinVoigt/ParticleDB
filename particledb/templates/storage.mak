@@ -49,6 +49,18 @@
 </div>
 % endfor
 
+<div class="clearfix"></div>
+
+<strong>Legend</strong>
+<div class="legend">
+    <div></div>
+    Empty cell
+</div>
+<div class="legend">
+    <div class="bg-info"></div>
+    Cell with contents
+</div>
+
 % if len(storages) == 0:
 <div class="alert alert-info" role="alert">
     <strong>No storage added yet!</strong>

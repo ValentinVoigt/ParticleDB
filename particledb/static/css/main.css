@@ -120,6 +120,23 @@ table tbody tr td.emptyrow {
  * Tables with valign=middle
  */
  
-.table tbody>tr>td.vert-align{
+.table tbody>tr>td.vert-align {
     vertical-align: middle;
+}
+
+/*
+ * Legend
+ */
+
+div.legend {
+    line-height: 24px;
+    margin: 0.4em 0;
+}
+
+div.legend div {
+    height: 24px;
+    width: 24px;
+    border: 1px solid #ccc;
+    margin-right: 0.5em;
+    float: left;
 }
