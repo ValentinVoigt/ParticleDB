@@ -28,6 +28,9 @@ function set_mpn_availability_status(status) {
 }
 
 function mpn_check_status() {
+    if ($("#mpn").val().length == 0)
+        return;
+
     var jqxhr = $.ajax({
         url: js_globals.mpn_check_url,
         method: "POST",
@@ -71,8 +74,8 @@ descriptions.initialize(true);
 
 $(function() {
     $("#mpn").blur(mpn_check_status);
+    mpn_check_status();
     if ($("#mpn").val().length > 0) {
-        mpn_check_status();
         $('#description').focus();
     } else {
         $('#mpn').focus();
