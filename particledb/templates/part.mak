@@ -122,9 +122,10 @@
     </div>
 </div>
 
-<form action="${request.route_path('remove_part', part_mpn=part.mpn)}" method="POST" id="remove-part-form"></form>
+<p class="clearfix"><hr></p>
 
-<p class="clearfix">
-    <hr>
-    <button type="button" class="btn btn-danger pull-right" id="remove-part">Remove from database</button>
-</p>
+% if not part.in_stock:
+    <form action="${request.route_path('remove_part', part_mpn=part.mpn)}" method="POST" id="remove-part-form">
+        <button type="button" class="btn btn-danger pull-right" id="remove-part">Remove from database</button>
+    </form>
+% endif
