@@ -43,5 +43,6 @@ setup(name='ParticleDB',
       main = particledb:main
       [console_scripts]
       initialize_ParticleDB_db = particledb.scripts.initializedb:main
+      clean_ParticleDB_db = particledb.scripts.cleandb:main
       """,
       )

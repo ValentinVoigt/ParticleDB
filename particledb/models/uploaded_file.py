@@ -45,6 +45,12 @@ class UploadedFile(Base):
         uploads = request.registry.settings['upload_destination']
         full_path = os.path.join(uploads, self.uuid)
         return full_path
+
+    def exists(self, request):
+        """ Return true, if the file exists on harddisk and is readable.
+        False otherwise
+        """
+        return os.path.isfile(self.get_full_path(request))
         
     def delete(self, request, ignore_missing=False):
         """ Deletes file on disk.
