@@ -64,6 +64,9 @@ class UploadViews(BaseView):
         manufacturer = get_or_404(Manufacturer, self.request.matchdict['manufacturer_id'])
         files, json_response = self.upload(IMAGE_EXTENSIONS)
         if len(files) > 0:
+            if manufacturer.logo_image is not None:
+                manufacturer.logo_image.delete(self.request)
+                DBSession.delete(manufacturer.logo_image)
             manufacturer.logo_image = files[0]
         return json_response
     
