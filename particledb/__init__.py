@@ -29,6 +29,7 @@ def main(global_config, **settings):
     config.add_route('upload_logo', '/upload/logo/{manufacturer_id}')
     config.add_route('upload_file', '/upload/file/{part_id}')
     config.add_route('uploaded_file', '/uploads/{uuid}')
+    config.add_route('uploaded_file_name', '/uploads/{id}/{name}')
     config.add_route('delete_file', '/upload/delete')
     
     ## JSON API

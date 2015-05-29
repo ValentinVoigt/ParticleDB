@@ -116,9 +116,25 @@ class UploadedFilesViews(BaseView):
     @view_config(
         route_name='uploaded_file',
         request_method='GET',
-    )        
+    )
     def uploaded_file(self):
         file = get_by_or_404(UploadedFile, uuid=self.request.matchdict.get('uuid'))
+        return FileResponse(
+            file.get_full_path(self.request),
+            request=self.request,
+            content_type=file.content_type
+        )
+        
+    @view_config(
+        route_name='uploaded_file_name',
+        request_method='GET',
+    )
+    def uploaded_file_name(self):
+        file = get_or_404(UploadedFile, self.request.matchdict.get('id'))
+        
+        if file.filename != self.request.matchdict.get('name'):
+            raise HTTPNotFound("File not found (filename mismatch)")
+            
         return FileResponse(
             file.get_full_path(self.request),
             request=self.request,

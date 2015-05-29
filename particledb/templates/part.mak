@@ -33,7 +33,7 @@
         <div id="files">
         % for file in part.files:
             <div class="dropdown" id="file-${file.id}">
-                <a href="${request.route_path('uploaded_file', uuid=file.uuid)}" target="_blank">
+                <a href="${request.route_path('uploaded_file_name', id=file.id, name=file.filename)}" target="_blank">
                     ${file.filename}
                 </a>
                 <a class="dropdown-toggle" data-toggle="dropdown">
