@@ -51,12 +51,6 @@ def store_file(request, post_file, allowed_extensions=None):
     DBSession.add(upload)
     return upload
 
-def get_file_size(file):
-    file.seek(0, 2) # Seek to the end of the file
-    size = file.tell() # Get the position of EOF
-    file.seek(0) # Reset the file position to the beginning
-    return size
-    
 @view_defaults(
     renderer='json',
     request_method='POST',
@@ -98,7 +92,6 @@ class UploadViews(BaseView):
             except InvalidFileForUpload as e:
                 json_data.append({
                     'name': os.path.basename(post_file.filename),
-                    'size': get_file_size(post_file.file),
                     'error': str(e),
                 })
 
