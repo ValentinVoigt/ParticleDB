@@ -2,7 +2,7 @@
     % if image is None:
         <i>None</i>
     % else:
-        <img src="${request.static_url('particledb:static/img/')}${image.path}" alt="${image.alt}"
+        <img src="${request.route_path('uploaded_file', uuid=image.uuid)}" alt="${image.filename}"
         % if width:
             width="${width}"
         % endif

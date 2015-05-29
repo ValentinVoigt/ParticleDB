@@ -27,7 +27,6 @@ class Base(DeclarativeBase):
         """
         return DBSession.query(cls).filter_by(**kwargs).first()
         
-from .image import Image
 from .manufacturer import Manufacturer
 from .package import Package
 from .parameter import Parameter
@@ -35,8 +34,9 @@ from .part import Part
 from .stock import Stock
 from .storage import Storage
 from .storage_cell import StorageCell
+from .uploaded_file import UploadedFile
 
 __all__ = [
-    'Base', 'DBSession', 'Image', 'Manufacturer', 'Package', 'Parameter',
-    'Part', 'Stock', 'Storage', 'StorageCell',
+    'Base', 'DBSession', 'Manufacturer', 'Package', 'Parameter',
+    'Part', 'Stock', 'Storage', 'StorageCell', 'UploadedFile',
 ]

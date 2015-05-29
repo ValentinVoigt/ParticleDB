@@ -71,6 +71,9 @@
             };
         </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/dist/jquery.fileupload/jquery.ui.widget.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/dist/jquery.fileupload/jquery.iframe-transport.js')}"></script>
+        <script src="${request.static_url('particledb:static/js/dist/jquery.fileupload/jquery.fileupload.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/jquery.hotkeys.js/jquery.hotkeys.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/typeahead.js/typeahead.bundle.js')}"></script>
         <script src="${request.static_url('particledb:static/js/dist/bootstrap/bootstrap.min.js')}"></script>

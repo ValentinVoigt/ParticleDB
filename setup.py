@@ -16,6 +16,7 @@ requires = [
     'zope.sqlalchemy',
     'waitress',
     'formencode',
+    'python-magic',
     ]
 
 setup(name='ParticleDB',

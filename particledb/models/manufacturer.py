@@ -13,8 +13,8 @@ class Manufacturer(Base):
     url = Column('url', String(255))
     parts = relationship("Part", backref="manufacturer")
     
-    logo_image_id = Column(Integer, ForeignKey('images.id'))
-    logo_image = relationship("Image")
+    logo_image_id = Column(Integer, ForeignKey('uploaded_files.id'))
+    logo_image = relationship("UploadedFile")
 
     @classmethod
     def by_name(cls, name):

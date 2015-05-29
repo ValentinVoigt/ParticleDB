@@ -26,6 +26,14 @@ mako.imports =
      from particledb.utils.filters import nl2br
 mako.filters = nl2br
 
+upload_destination = 
+upload_allowed_exts =
+    png
+    jpg
+    jpeg
+    gif
+    svg
+
 ###
 # logging configuration
 # http://docs.pylonsproject.org/projects/pyramid/en/1.6-branch/narr/logging.html

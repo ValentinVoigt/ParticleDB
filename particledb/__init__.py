@@ -25,6 +25,10 @@ def main(global_config, **settings):
     config.add_route('remove_part', '/parts/{part_mpn}/remove')
     config.add_route('storage_remove', '/storage/remove')
     
+    ## Uploads
+    config.add_route('upload_logo', '/upload/logo/{manufacturer_id}')
+    config.add_route('uploaded_file', '/uploads/{uuid}')
+    
     ## JSON API
     config.add_route('search_prefetch', '/json/search-prefetch')
     config.add_route('mpn_check', '/json/mpn-check')

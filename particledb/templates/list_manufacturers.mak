@@ -42,11 +42,14 @@
                     </a>
                 </td>
                 <td class="vert-align">
-                    % if manufacturer.logo_image:
-                        ${make_image(manufacturer.logo_image, height=35)}
-                    % else:
-                        <i style="line-height:35px">None</i>
-                    % endif
+                    <label for="fileupload-${manufacturer.id}" style="cursor:pointer">
+                        <input class="logo-upload hide" id="fileupload-${manufacturer.id}" type="file" name="files[]" data-url="${request.route_path('upload_logo', manufacturer_id=manufacturer.id)}" multiple>
+                        % if manufacturer.logo_image:
+                            ${make_image(manufacturer.logo_image, height=35)}
+                        % else:
+                            <span class="btn btn-default">Upload</span>
+                        % endif
+                    </label>
                 </td>
             </tr>
             % endfor
