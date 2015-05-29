@@ -60,6 +60,5 @@ class UploadedFile(Base):
     def formatted_size(self):
         units = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
         unit = math.floor(math.log(self.size, 1024))
-        if unit > len(units) - 1:
-            unit = len(units) - 1
+        unit = min([len(units) - 1, unit])
         return "%0.2f %s" % (self.size / math.pow(1024, unit), units[unit])
