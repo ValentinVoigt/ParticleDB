@@ -18,7 +18,7 @@ $(function() {
             $('#fileupload').prop('disabled', true);
             $('#fileupload').parent().find('.btn').addClass('disabled');
         },
-        done: function (e, data) {
+        stop: function (e, data) {
             location.reload();
         },
         fail: function (e, data) {
@@ -29,7 +29,7 @@ $(function() {
             $('#fileupload').prop('disabled', false);
             $('#fileupload').parent().find('.btn').removeClass('disabled');
         },
-        progress: function (e, data) {
+        progressall: function (e, data) {
             var percentage = parseInt(data.loaded / data.total * 100, 10);
             $('#progress div.progress-bar')
                 .data('aria-valuenow', percentage)
@@ -38,6 +38,7 @@ $(function() {
             if (percentage == 100)
                 $('#progress div.progress-bar').addClass('progress-bar-striped active');
         },
+        dropZone: $('#dropzone'),
     });
     
     $('.delete-file').click(function() {

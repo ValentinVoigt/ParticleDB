@@ -33,7 +33,7 @@
         <div id="files">
         % for file in part.files:
             <div class="dropdown" id="file-${file.id}">
-                <a href="${request.route_path('uploaded_file', uuid=file.uuid)}">
+                <a href="${request.route_path('uploaded_file', uuid=file.uuid)}" target="_blank">
                     ${file.filename}
                 </a>
                 <a class="dropdown-toggle" data-toggle="dropdown">
@@ -47,6 +47,9 @@
             </div>
         % endfor
         </div>
+        
+        <div id="dropzone" class="well">Drop files here</div>
+
 
         % if len(part.files) == 0:
             <p><i>none</i></p>
