@@ -32,6 +32,10 @@ def store_file(request, post_file, allowed_extensions=None):
     # check if uploaded file is valid
     if allowed_extensions and not extension[1:].lower() in allowed_extensions:
         raise InvalidFileForUpload('Extension "%s" is not allowed' % extension)
+    if '/' in filename:
+        raise InvalidFileForUpload('Invalid filename, contains slashes: %s' % filename)
+    if len(filename) == 0:
+        raise InvalidFileForUpload('Invalid filename, is empty')
     
     # write file to temporary location
     input_file = post_file.file
