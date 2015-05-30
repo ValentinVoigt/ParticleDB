@@ -88,7 +88,7 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             });
-            $(document).bind('keypress', 'f', function() {
+            $(document).bind('keyup', 'f', function() {
                 $('#globalsearchinput').focus();
             });
             /* enable drop zone effects */
