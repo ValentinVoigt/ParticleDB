@@ -36,7 +36,7 @@ def store_file(request, post_file, allowed_extensions=None):
         raise InvalidFileForUpload('Invalid filename, contains slashes: %s' % filename)
     if len(filename) == 0:
         raise InvalidFileForUpload('Invalid filename, is empty')
-    
+
     # write file to temporary location
     input_file = post_file.file
     input_file.seek(0)
@@ -67,18 +67,18 @@ class UploadViews(BaseView):
                 DBSession.delete(manufacturer.logo_image)
             manufacturer.logo_image = files[0]
         return json_response
-    
+
     @view_config(route_name='upload_file')
     def upload_file(self):
         part = get_or_404(Part, self.request.matchdict['part_id'])
         files, json_response = self.upload()
         part.files.extend(files)
         return json_response
-    
+
     def upload(self, allowed_extensions=None):
         json_data = []
         files = []
-        
+
         for post_file in self.request.POST.getall('files[]'):
             try:
                 file = store_file(self.request, post_file, allowed_extensions)
@@ -103,7 +103,7 @@ class UploadedFilesViews(BaseView):
         route_name='delete_file',
         request_method='POST',
         renderer='json',
-    )        
+    )
     def delete_file(self):
         file = get_or_404(UploadedFile, self.request.POST.get('id'))
         file.delete(self.request, ignore_missing=True)
@@ -121,17 +121,17 @@ class UploadedFilesViews(BaseView):
             request=self.request,
             content_type=file.content_type
         )
-        
+
     @view_config(
         route_name='uploaded_file_name',
         request_method='GET',
     )
     def uploaded_file_name(self):
         file = get_or_404(UploadedFile, self.request.matchdict.get('id'))
-        
+
         if file.filename != self.request.matchdict.get('name'):
             raise HTTPNotFound("File not found (filename mismatch)")
-            
+
         return FileResponse(
             file.get_full_path(self.request),
             request=self.request,

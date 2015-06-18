@@ -119,7 +119,7 @@ table tbody tr td.emptyrow {
 /*
  * Tables with valign=middle
  */
- 
+
 .table tbody>tr>td.vert-align {
     vertical-align: middle;
 }

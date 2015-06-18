@@ -20,18 +20,18 @@ def main(global_config, **settings):
     config.add_route('part', '/parts/{part_mpn}')
     config.add_route('add_part', '/add/part')
     config.add_route('storage', '/storage')
-    
+
     ## Redirects
     config.add_route('remove_part', '/parts/{part_mpn}/remove')
     config.add_route('storage_remove', '/storage/remove')
-    
+
     ## Uploads
     config.add_route('upload_logo', '/upload/logo/{manufacturer_id}')
     config.add_route('upload_file', '/upload/file/{part_id}')
     config.add_route('uploaded_file', '/uploads/{uuid}')
     config.add_route('uploaded_file_name', '/uploads/{id}/{name}')
     config.add_route('delete_file', '/upload/delete')
-    
+
     ## JSON API
     config.add_route('search_prefetch', '/json/search-prefetch')
     config.add_route('mpn_check', '/json/mpn-check')
@@ -43,6 +43,6 @@ def main(global_config, **settings):
     config.add_route('parameter_add', '/json/parameter-add')
     config.add_route('parameter_reorder', '/json/parameter-reorder')
     config.add_route('storage_add', '/json/storage-add')
-    
+
     config.scan()
     return config.make_wsgi_app()

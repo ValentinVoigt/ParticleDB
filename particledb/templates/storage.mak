@@ -71,7 +71,7 @@
 <%def name="make_add_storage_form()">
     <p>You can add a new storage container here.</p>
     <p>Storage containers a 2-dimensional. They have a width and a height. </p>
-    
+
     <form class="form-horizontal" style="margin:40px 0 20px 0" id="storage-form">
         <div class="form-group">
             <label for="storage-name" class="col-sm-4 control-label">Name</label>

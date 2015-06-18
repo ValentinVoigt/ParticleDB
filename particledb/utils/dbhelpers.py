@@ -16,7 +16,7 @@ def get_or_404(cls, *args):
     """
     obj = cls.get(*args)
     return return_or_404(obj, str(args))
-    
+
 def get_by_or_404(cls, **kwargs):
     """ Uses a model's .get_by-function to return an object by given filter.
     Raises pyramid.httpexceptions.HTTPNotFound if not found.

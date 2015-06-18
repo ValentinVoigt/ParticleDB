@@ -25,7 +25,7 @@ function remove_parameter(id) {
 
 function on_remove_parameter_click() {
     var id = $(this).attr('data-id');
-    
+
     if (!id) {
         // new (empty) parameter
         $(this).closest('tr').fadeOut('fast', function() { $(this).remove(); });
@@ -40,7 +40,7 @@ function on_remove_parameter_click() {
             },
         });
     }
-    
+
     return false; // prevent scrolling
 }
 
@@ -50,7 +50,7 @@ function check_if_both_are_filled(e, reason) {
 
     var key = $(this).closest('tr').find('.editable-key').editable('getValue', true);
     var value = $(this).closest('tr').find('.editable-value').editable('getValue', true);
-    
+
     if (key.length  > 0 && value.length > 0) {
         $(this).closest('tr').find('.editable').editable('submit', {
             url: js_globals.parameter_add_url,
@@ -91,12 +91,12 @@ function save_parameter_order() {
 
 $(function() {
     $('.remove-parameter').click(on_remove_parameter_click);
-    
+
     $('#btn-edit').click(function() {
         $(this).toggleClass('active');
         $('.remove-parameter, .parameter-sort, #btn-add-row').toggleClass('hidden');
         $('.editable-key, .editable-value').editable('toggleDisabled');
-        
+
         if ($(this).hasClass('active')) {
             $("#table-parameters tbody").sortable('enable');
         } else {
@@ -104,7 +104,7 @@ $(function() {
             $("#table-parameters tbody").sortable('disable');
         }
     });
-    
+
     $('#btn-add').click(function() {
         var template = $('#new-parameter-template').clone();
         template.removeClass('hidden').removeAttr('id').addClass('empty-parameter');
@@ -117,7 +117,7 @@ $(function() {
         template.find('.editable-value').on('hidden.add_new', check_if_both_are_filled);
         $('#table-parameters tr:last').before(template);
     });
-    
+
     $("#table-parameters tbody").sortable({
         sortableClass: 'info',
         forcePlaceholderSize: true,
@@ -126,7 +126,7 @@ $(function() {
     }).sortable('disable').bind('sortupdate', function(e, ui) {
         save_parameter_order();
     });
-    
+
     setup_parameter_editable($('.editable-key'), 'key').editable('toggleDisabled');
     setup_parameter_editable($('.editable-value'), 'value').editable('toggleDisabled');
 });

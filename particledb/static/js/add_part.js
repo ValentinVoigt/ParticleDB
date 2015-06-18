@@ -9,7 +9,7 @@ function set_mpn_availability_status(status) {
         .removeClass('has-error')
         .removeClass('has-success')
         .removeClass('has-feedback');
-    
+
     if (status == INPUT_STATUS_OKAY) {
         $('#mpn-form-group')
             .addClass('has-success')
@@ -55,7 +55,7 @@ var manufacturers = new Bloodhound({
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: js_globals.manufacturers_prefetch_url,
 });
- 
+
 // prevents caching
 manufacturers.clear();
 manufacturers.clearPrefetchCache();
@@ -66,7 +66,7 @@ var descriptions = new Bloodhound({
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: js_globals.descriptions_prefetch_url,
 });
- 
+
 // prevents caching
 descriptions.clear();
 descriptions.clearPrefetchCache();
@@ -80,7 +80,7 @@ $(function() {
     } else {
         $('#mpn').focus();
     }
-    
+
     $('#manufacturer').typeahead(null, {
         source: manufacturers,
         display: 'name',

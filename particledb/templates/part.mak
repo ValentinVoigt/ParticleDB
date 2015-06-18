@@ -40,21 +40,21 @@
                     <span class="caret" aria-expanded="true"></span>
                 </a>
                 (${file.formatted_size})
-                
+
                 <ul class="dropdown-menu" role="menu">
                     <li><a role="menuitem" tabindex="-1" href="#" class="delete-file" data-id="${file.id}">Delete</a></li>
                 </ul>
             </div>
         % endfor
         </div>
-        
+
         <div id="dropzone" class="well">Drop files here</div>
 
 
         % if len(part.files) == 0:
             <p><i>none</i></p>
         % endif
-        
+
         <div class="progress hide" id="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                 <span class="sr-only">0% Complete</span>
@@ -62,7 +62,7 @@
         </div>
         <br>
     </div>
-    
+
     <div class="col-md-4">
         % if part.manufacturer:
             ${make_manufacturer(part.manufacturer)}
@@ -133,7 +133,7 @@
     </div>
     <div class="col-md-6">
         <h3 class="page-header">Stock</h3>
-        <table class="table table-striped table-condensed" id="table-parameters" data-part-id="${part.id}">
+        <table class="table table-striped table-condensed">
             <thead>
                 <tr>
                     <th>Storage</th>
@@ -146,7 +146,7 @@
                 % if len(part.stocks) == 0:
                     <td colspan="4" class="text-center">None in stock</td>
                 % else:
-                    % for stock in part.stocks: 
+                    % for stock in part.stocks:
                     <tr>
                         <td>${stock.cell.storage.name}</td>
                         <td>${stock.cell.number}</td>
@@ -160,6 +160,16 @@
                     % endfor
                 % endif
             </tbody>
+            <tfoot>
+                <tr class="active">
+                    <td colspan="4" class="text-right">
+                        <button type="button" class="btn btn-default btn-xs" aria-label="Add">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Add
+                        </button>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

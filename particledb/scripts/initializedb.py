@@ -15,7 +15,7 @@ def main():
     if len(sys.argv) != 2:
         usage()
 
-    config_uri = sys.argv[1]    
+    config_uri = sys.argv[1]
     bootstrap(config_uri)
 
     Base.metadata.create_all()

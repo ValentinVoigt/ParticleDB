@@ -10,7 +10,7 @@ class Base(DeclarativeBase):
     """ Base model for all models.
     """
     __abstract__ = True
-    
+
     @classmethod
     def get(cls, *args):
         """ Returns object by primary ID.
@@ -26,7 +26,7 @@ class Base(DeclarativeBase):
         Returns None if object is not found.
         """
         return DBSession.query(cls).filter_by(**kwargs).first()
-        
+
 from .manufacturer import Manufacturer
 from .package import Package
 from .parameter import Parameter

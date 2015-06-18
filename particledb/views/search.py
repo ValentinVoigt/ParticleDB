@@ -4,7 +4,7 @@ from ..models import DBSession, Part
 
 from .base import BaseView
 
-@view_defaults(request_method='GET')       
+@view_defaults(request_method='GET')
 class SearchView(BaseView):
 
     @view_config(route_name='search_prefetch', renderer='json')

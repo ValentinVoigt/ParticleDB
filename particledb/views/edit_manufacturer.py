@@ -16,13 +16,13 @@ class ManufacturersEditView(BaseView):
         request_method='POST')
     def manufacturers_edit(self):
         manufacturer = get_or_404(Manufacturer, self.request.POST.get('pk'))
-            
+
         if self.request.POST.get('name') == 'name':
             manufacturer.name = self.request.POST.get('value')
             return {'value': manufacturer.name}
 
         if self.request.POST.get('name') == 'url':
-            raw_url = self.request.POST.get('value')    
+            raw_url = self.request.POST.get('value')
             val = validators.URL(add_http=True)
             try:
                 manufacturer.url = val.to_python(raw_url)

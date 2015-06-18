@@ -20,13 +20,13 @@ def main():
         if sys.argv[2] != '--clean':
             usage()
         clean = True
-        
+
     config_uri = sys.argv[1]
     request = bootstrap(config_uri)['request']
-    
+
     upload_destination = request.registry.settings['upload_destination']
     uuid_map = {}
-    
+
     for file in DBSession.query(UploadedFile).all():
         if not file.exists(request):
             if clean:
@@ -37,7 +37,7 @@ def main():
                 print("%s (%s) is missing" % (file.filename, file.formatted_size))
         else:
             uuid_map[file.uuid] = file
-            
+
     for path in os.listdir(upload_destination):
         if len(path) < 36: # UUIDs have at least 36 letters
             continue
@@ -47,7 +47,7 @@ def main():
                 print("%s was not in database; removed" % path)
             else:
                 print("%s is not in database" % path)
-            
+
     if not clean:
         print("\nUse --clean to remove those files and database entries.")
     else:

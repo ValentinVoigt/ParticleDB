@@ -14,7 +14,7 @@ class Storage(Base):
     width = Column('width', Integer, nullable=False)
     height = Column('height', Integer, nullable=False)
     cells = relationship("StorageCell", backref="storage", lazy='subquery')
-    
+
     class Row():
 
         def __init__(self, **kwargs):
@@ -24,7 +24,7 @@ class Storage(Base):
             for col in range(0, self.storage.width):
                 number = self.row * self.storage.width + col + 1
                 yield self.storage.get_cell(number)
-    
+
     def get_cell(self, number):
         try:
             return list(filter(lambda x: x.number == number, self.cells))[0]
@@ -32,7 +32,7 @@ class Storage(Base):
             cell = StorageCell(number=number)
             self.cells.append(cell)
             return cell
-    
+
     def iter_rows(self):
         for row in range(0, self.height):
             yield Storage.Row(storage=self, row=row)
@@ -43,4 +43,3 @@ class Storage(Base):
             if len(cell.stocks) > 0:
                 return False
         return True
-            

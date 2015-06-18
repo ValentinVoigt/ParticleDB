@@ -1,6 +1,6 @@
 function is_digit(val) {
     var patt = /[0-9]+/;
-    return patt.test(val); 
+    return patt.test(val);
 }
 
 function form_is_valid() {
@@ -8,9 +8,9 @@ function form_is_valid() {
     var columns = $('#storage-columns').val();
     var rows = $('#storage-rows').val();
     var valid = true;
-    
+
     $('#error-message').addClass('hidden');
-    
+
     /* Name */
     if (name.length > 0) {
         $('#storage-name').closest('div.form-group').removeClass('has-error');
@@ -18,7 +18,7 @@ function form_is_valid() {
         $('#storage-name').closest('div.form-group').addClass('has-error');
         valid = false;
     }
-    
+
     /* Columns */
     if (is_digit(columns) && columns > 0) {
         $('#storage-columns').closest('div.form-group').removeClass('has-error');
@@ -26,7 +26,7 @@ function form_is_valid() {
         $('#storage-columns').closest('div.form-group').addClass('has-error');
         valid = false;
     }
-    
+
     /* Rows */
     if (is_digit(rows) & rows > 0) {
         $('#storage-rows').closest('div.form-group').removeClass('has-error');
@@ -34,7 +34,7 @@ function form_is_valid() {
         $('#storage-rows').closest('div.form-group').addClass('has-error');
         valid = false;
     }
-    
+
     return valid;
 }
 

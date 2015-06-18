@@ -19,7 +19,7 @@ class ListViewAbstract(BaseView):
     def serve(self, query):
         pagination = Pagination(query, self.request)
         return {'pagination': pagination}
-        
+
 class ListView(ListViewAbstract):
 
     @view_config(
@@ -33,7 +33,7 @@ class ListView(ListViewAbstract):
         renderer='particledb:templates/list_packages.mak')
     def list_packages(self):
         return self.serve(DBSession.query(Package))
-        
+
     @view_config(
         route_name='list_manufacturers',
         renderer='particledb:templates/list_manufacturers.mak')

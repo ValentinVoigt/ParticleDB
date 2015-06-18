@@ -3,7 +3,7 @@ var parts = new Bloodhound({
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: js_globals.search_prefetch_url,
 });
- 
+
 // prevents caching
 parts.clear();
 parts.clearPrefetchCache();

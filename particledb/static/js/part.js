@@ -8,9 +8,9 @@ $(function() {
                     $('#remove-part-form').submit();
                 }
             }}
-        ); 
+        );
     });
-    
+
     $('#fileupload').fileupload({
         dataType: 'json',
         start: function (e) {
@@ -40,7 +40,7 @@ $(function() {
         },
         dropZone: $('#dropzone'),
     });
-    
+
     $('.delete-file').click(function() {
         var id = $(this).data('id');
         var jqxhr = $.ajax({

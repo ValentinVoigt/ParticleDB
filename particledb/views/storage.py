@@ -21,7 +21,7 @@ class StorageViews(BaseView):
         storages = storages.options(subqueryload('cells').subqueryload('stocks'))
         storages = storages.all()
         return {'storages': storages}
-        
+
 @view_defaults(request_method='POST')
 class StorageJsonViews(BaseView):
 

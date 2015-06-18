@@ -12,7 +12,7 @@ class Manufacturer(Base):
     name = Column('name', String(45), unique=True, nullable=False)
     url = Column('url', String(255))
     parts = relationship("Part", backref="manufacturer")
-    
+
     logo_image_id = Column(Integer, ForeignKey('uploaded_files.id'))
     logo_image = relationship("UploadedFile")
 
@@ -23,7 +23,7 @@ class Manufacturer(Base):
     @classmethod
     def get_or_create(cls, name):
         """ Fetches an Manufacturer instance by name.
-        
+
         If there's no object named ``name``, a new one is created
         and added to the session.
         """

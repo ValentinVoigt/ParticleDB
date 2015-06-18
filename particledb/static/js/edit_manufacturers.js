@@ -9,7 +9,7 @@ function xeditable_error(response, newValue) {
 $(function() {
     $('.editable-name').editable({success: xeditable_update_value, error: xeditable_error});
     $('.editable-url').editable({success: xeditable_update_value, error: xeditable_error});
-    
+
     $('.logo-upload').fileupload({
         dataType: 'json',
         done: function (e, data) {

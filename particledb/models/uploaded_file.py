@@ -8,13 +8,13 @@ import math
 
 class UploadedFile(Base):
     """ Represents an uploaded file.
-    
+
     Files are stored in the filesystem and referenced from a table.
     """
     __tablename__ = 'uploaded_files'
 
     id = Column('id', Integer, primary_key=True)
-    
+
     # contains the original filename from the client
     filename = Column('name', String(255), nullable=False)
 
@@ -23,10 +23,10 @@ class UploadedFile(Base):
 
     # contains the file size in bytes
     size = Column('size', Integer, nullable=True)
-    
+
     # contains the mime type of the file (for HTTP header)
     content_type = Column('content_type', String(255))
-    
+
     @classmethod
     def create_from(cls, original_name, file_path):
         """ Creates a new UploadedFile instance from the given parameters.
@@ -38,7 +38,7 @@ class UploadedFile(Base):
             size=os.path.getsize(file_path),
             content_type=str(magic.from_file(file_path, mime=True), encoding="ascii"),
         )
-    
+
     def get_full_path(self, request):
         """ Returns the full path on local harddisk to the file.
         """
@@ -51,7 +51,7 @@ class UploadedFile(Base):
         False otherwise
         """
         return os.path.isfile(self.get_full_path(request))
-        
+
     def delete(self, request, ignore_missing=False):
         """ Deletes file on disk.
         Instance must be removed from session manually.
@@ -61,7 +61,7 @@ class UploadedFile(Base):
         except FileNotFoundError as e:
             if not ignore_missing:
                 raise e
-        
+
     @property
     def formatted_size(self):
         units = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']

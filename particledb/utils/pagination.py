@@ -8,7 +8,7 @@ class Pagination(object):
 
     def __init__(self, dataset, request, page_key='page', per_page=30, route_name=None):
         """ Initializes the pagination object.
-        
+
         @param dataset SQLAlchemy query object
         @param request Pyramid's request object
         @param page_key Name of the page parameter in the matchdict-object
@@ -21,7 +21,7 @@ class Pagination(object):
         self.per_page = per_page
         self.route_name = route_name if route_name else self.request.matched_route.name
         self.total = dataset.count()
-                
+
     @property
     def page(self):
         """ Returns the current page number.
@@ -29,7 +29,7 @@ class Pagination(object):
         if self.page_key in self.request.matchdict:
             return int(self.request.matchdict[self.page_key])
         return 1
-        
+
     @property
     def num_pages(self):
         """ Returns the number of pages available.
@@ -69,7 +69,7 @@ class Pagination(object):
 
     def route_path(self, page):
         """ Internal helper-function.
-        
+
         Returns the path a specific page. See __init__ for details.
         Returns "#" if page is invalid.
         """

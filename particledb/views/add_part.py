@@ -19,7 +19,7 @@ class AddPartView(BaseView):
             'defaults': {'mpn': self.request.GET.get('mpn', '')},
             'new_part': None,
         }
-        
+
         if self.request.method == "POST":
             try:
                 fields = AddPartSchema().to_python(self.request.POST)
@@ -68,4 +68,3 @@ class MPNCheckJsonView(BaseView):
         return [{
             'description': part.description,
         } for part in DBSession.query(Part).all()]
-        
