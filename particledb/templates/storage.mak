@@ -49,6 +49,13 @@
 </div>
 % endfor
 
+% if len(storages) == 0:
+<div class="alert alert-info" role="alert">
+    <strong>No storage added yet!</strong>
+    Use <i>Add</i> button above to add a new storage container.
+</div>
+% endif
+
 <div class="clearfix"></div>
 
 <strong>Legend</strong>
@@ -60,13 +67,10 @@
     <div class="bg-info"></div>
     Cell with contents
 </div>
-
-% if len(storages) == 0:
-<div class="alert alert-info" role="alert">
-    <strong>No storage added yet!</strong>
-    Use <i>Add</i> button above to add a new storage container.
+<div class="legend">
+    <div class="bg-danger"></div>
+    Full cell
 </div>
-% endif
 
 <%def name="make_add_storage_form()">
     <p>You can add a new storage container here.</p>
