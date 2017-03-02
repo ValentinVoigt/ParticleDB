@@ -36,7 +36,7 @@ class UploadedFile(Base):
             uuid=os.path.basename(file_path),
             filename=original_name,
             size=os.path.getsize(file_path),
-            content_type=str(magic.from_file(file_path, mime=True), encoding="ascii"),
+            content_type=magic.from_file(file_path, mime=True),
         )
 
     def get_full_path(self, request):
