@@ -17,9 +17,9 @@ class Part(Base):
     mpn = Column('mpn', String(45), unique=True, nullable=False)
     description = Column('description', String(45))
     manufacturers_id  = Column('manufacturers_id', Integer, ForeignKey('manufacturers.id'))
-    parameters = relationship("Parameter", order_by="Parameter.order")
+    parameters = relationship("Parameter", order_by="Parameter.order", cascade="all, delete-orphan", single_parent=True)
     stocks = relationship("Stock", backref="part")
-    files = relationship("UploadedFile", secondary=association_table)
+    files = relationship("UploadedFile", secondary=association_table, cascade="all, delete-orphan", single_parent=True)
 
     @property
     def in_stock(self):

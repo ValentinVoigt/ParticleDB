@@ -21,12 +21,10 @@ def main(global_config, **settings):
     config.add_route('list_parts', '/list/parts/{page}')
     config.add_route('list_packages', '/list/packages/{page}')
     config.add_route('list_manufacturers', '/list/manufacturers/{page}')
+    config.add_route('remove_part', '/parts/{part_mpn:.*}/remove')
     config.add_route('part', '/parts/{part_mpn:.*}')
     config.add_route('add_part', '/add/part')
     config.add_route('storage', '/storage')
-
-    ## Redirects
-    config.add_route('remove_part', '/parts/{part_mpn}/remove')
     config.add_route('storage_remove', '/storage/remove')
 
     ## Uploads

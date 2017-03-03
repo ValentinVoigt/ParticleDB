@@ -7,7 +7,6 @@ from ..models import DBSession, Part, Parameter
 from .base import BaseView
 from ..utils.dbhelpers import get_by_or_404, get_or_404
 
-@view_defaults(request_method='GET')
 class PartView(BaseView):
 
     nav_active = 'list_parts'

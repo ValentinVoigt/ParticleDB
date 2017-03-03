@@ -1,10 +1,14 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy import event
 
-from . import Base
+from . import Base, DBSession
 
 import os
 import magic
 import math
+
+# Contains a list of objects marked for deletion if the transaction got committed
+delete_after_commit = []
 
 class UploadedFile(Base):
     """ Represents an uploaded file.
@@ -68,3 +72,22 @@ class UploadedFile(Base):
         unit = math.floor(math.log(self.size, 1024))
         unit = min([len(units) - 1, unit])
         return "%0.2f %s" % (self.size / math.pow(1024, unit), units[unit])
+
+# These three events are responsible for deleting the actual file
+# once the object gets deleted. If the transaction is rolled back,
+# the file is not deleted.
+
+@event.listens_for(UploadedFile, 'after_delete')
+def on_after_delete(mapper, connection, target):
+    delete_after_commit.append(target)
+
+@event.listens_for(DBSession, 'after_commit')
+def on_after_commit(session):
+    from pyramid.threadlocal import get_current_request
+    for file_ in delete_after_commit:
+        if session.object_session(file_) == session:
+            file_.delete(get_current_request())
+
+@event.listens_for(DBSession, 'after_rollback')
+def on_after_rollback(session):
+    delete_after_commit = list(filter(lambda f: f in session, delete_after_commit))
