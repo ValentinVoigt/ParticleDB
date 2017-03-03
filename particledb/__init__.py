@@ -6,9 +6,12 @@ from .models import DBSession, Base
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+    ## Database configuration
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
+
+    ## General app configuration
     config = Configurator(settings=settings)
     config.include('pyramid_mako')
     config.add_static_view('static', 'static', cache_max_age=3600)
@@ -36,6 +39,7 @@ def main(global_config, **settings):
     ## JSON API
     config.add_route('search_prefetch', '/json/search-prefetch')
     config.add_route('mpn_check', '/json/mpn-check')
+    config.add_route('octopart_search', '/json/octopart-search')
     config.add_route('manufacturers_prefetch', '/json/manufacturers-prefetch')
     config.add_route('manufacturers_edit', '/json/manufacturers-edit')
     config.add_route('descriptions_prefetch', '/json/descriptions-prefetch')

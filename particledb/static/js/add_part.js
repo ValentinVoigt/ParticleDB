@@ -50,6 +50,62 @@ function mpn_check_status() {
     });
 }
 
+function shorten(text) {
+    if (text.length > 73) {
+        return text.substring(0, 70) + "...";
+    }
+    return text;
+}
+
+function on_octopart_result_click() {
+    $('#mpn').val($(this).data('mpn'));
+    $('#description').val($(this).data('desc'));
+    $('#manufacturer').val($(this).data('manufacturer'));
+    mpn_check_status();
+}
+
+function process_octopart_search_results(data) {
+    $('#octopart-loader').hide();
+    $('#octopart-results').show();
+    $('#octopart-results tbody').empty();
+    $('#octopart-results tfoot').hide();
+
+    if (!data || data.length == 0 || data.results.length == 0) {
+        $('#octopart-results tfoot').show();
+        return;
+    }
+
+    $(data.results).each(function(idx) {
+        var glyph = $('<span>').addClass("glyphicon glyphicon-saved");
+        var btn = $('<button>').attr('type', 'button').addClass('btn btn-sm btn-default').css('margin', '3px 0 0 3px').append(glyph);
+        var mpn = $('<td>').text(this.item.mpn);
+        var manufacturer = $('<td>').text(this.item.manufacturer.name);
+        var desc = $('<td>').text(shorten(this.snippet || ""));
+        btn.data('mpn', this.item.mpn).data('desc', this.snippet).data('manufacturer', this.item.manufacturer.name);
+        var row = $('<tr>').append(btn, mpn, manufacturer, desc);
+        $('#octopart-results tbody').append(row);
+    });
+
+    $('#octopart-results tbody tr button').click(on_octopart_result_click);
+}
+
+function do_mpn_search() {
+    var mpn = $("#mpn").val();
+
+    if (mpn.length < 3)
+        return;
+
+    $('#octopart-results').hide();
+    $('#octopart-loader').show();
+
+    $.ajax({
+        type: "POST",
+        url: js_globals.octopart_search_url,
+        data: {'mpn': mpn},
+        success: process_octopart_search_results,
+    });
+}
+
 var manufacturers = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -89,4 +145,7 @@ $(function() {
         source: descriptions,
         display: 'description',
     });
+
+    $('#octopart-results').hide();
+    $('#mpn-octopart-search').click(do_mpn_search);
 });

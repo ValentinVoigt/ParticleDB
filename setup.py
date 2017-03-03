@@ -18,6 +18,7 @@ requires = [
     'waitress',
     'formencode',
     'python-magic',
+    'requests',
     ]
 
 setup(name='ParticleDB',

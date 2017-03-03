@@ -27,6 +27,7 @@ mako.imports =
 mako.filters = nl2br
 
 upload_destination = 
+octopart_key =
 
 ###
 # logging configuration

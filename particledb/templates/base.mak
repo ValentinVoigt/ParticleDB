@@ -69,6 +69,7 @@
                 storage_add_url: "${request.route_path('storage_add')}",
                 storage_url: "${request.route_path('storage')}",
                 delete_file_url: "${request.route_path('delete_file')}",
+                octopart_search_url: "${request.route_path('octopart_search')}",
             };
         </script>
         <script src="${request.static_url('particledb:static/js/dist/jquery/jquery-1.11.2.min.js')}"></script>

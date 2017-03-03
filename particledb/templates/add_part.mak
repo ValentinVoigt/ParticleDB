@@ -34,6 +34,31 @@
             <span class="glyphicon glyphicon-option-horizontal form-control-feedback hidden" aria-hidden="true" id="mpn-glyphicon-refresh"></span>
             <span class="sr-only">(success)</span>
         </div>
+        <button type="button" class="btn btn-info" aria-label="Search for MPN on Octopart" id="mpn-octopart-search">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <img alt="Loading..." src="${request.static_url('particledb:static/img/ajax-loader-bar.gif')}" style="display:none" id="octopart-loader">
+            <table class="table table-striped" id="octopart-results">
+                <thead>
+                    <tr>
+                        <th>Add</th>
+                        <th>MPN</th>
+                        <th>Manufacturer</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="active">
+                        <td colspan="3"><i>No results found</i></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <div class="form-group">
         <label for="description" class="col-sm-2 control-label">Description</label>

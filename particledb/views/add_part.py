@@ -2,6 +2,7 @@ from pyramid.view import view_config, view_defaults
 from formencode.api import Invalid
 
 from ..models import DBSession, Part, Manufacturer
+from ..utils.octopart import Octopart
 from ..schemas.add_part import AddPartSchema
 from .base import BaseView
 
@@ -38,6 +39,18 @@ class AddPartView(BaseView):
         return data
 
 class MPNCheckJsonView(BaseView):
+
+    @view_config(
+        route_name='octopart_search',
+        renderer='json',
+        request_method='POST')
+    def octopart_search(self):
+        mpn = self.request.POST.get("mpn", "")
+
+        if len(mpn) < 3:
+            return {}
+
+        return Octopart(self.request.registry.settings).search(mpn)
 
     @view_config(
         route_name='mpn_check',

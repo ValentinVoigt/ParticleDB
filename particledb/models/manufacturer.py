@@ -26,7 +26,12 @@ class Manufacturer(Base):
 
         If there's no object named ``name``, a new one is created
         and added to the session.
+
+        If ``name`` is empty, this function will always return None.
         """
+        if not name:
+            return None
+
         try:
             return DBSession.query(cls).filter(cls.name==name).one()
         except exc.NoResultFound:
