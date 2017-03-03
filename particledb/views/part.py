@@ -36,6 +36,15 @@ class PartView(BaseView):
         return HTTPFound(self.request.route_path("list_parts", page=1))
 
     @view_config(
+        route_name='description_edit',
+        request_method='POST',
+        renderer='json')
+    def description_edit(self):
+        part = get_by_or_404(Part, mpn=self.request.POST.get('pk'))
+        part.description = self.request.POST.get('value')
+        return {}
+
+    @view_config(
         route_name='parameter_remove',
         request_method='POST',
         renderer='json')

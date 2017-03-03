@@ -16,7 +16,7 @@
     <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-body">
-                ${part.description}
+                <a href="#" class="editable" id="change-description" data-pk="${part.mpn}" data-type="textarea" data-url="${request.route_path('description_edit')}" data-title="Change description">${part.description}</a>
             </div>
         </div>
         <h4>

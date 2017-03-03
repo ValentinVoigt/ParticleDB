@@ -53,4 +53,8 @@ $(function() {
         });
         return false;
     });
+
+    $('#change-description').editable({
+        name: 'description',
+    });
 });

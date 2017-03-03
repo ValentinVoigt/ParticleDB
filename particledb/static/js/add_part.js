@@ -137,6 +137,13 @@ $(function() {
         $('#mpn').focus();
     }
 
+    $('#mpn').keypress(function (e) {
+        if (e.which == 13) { // return key
+            do_mpn_search();
+            return false;
+        }
+    });
+
     $('#manufacturer').typeahead(null, {
         source: manufacturers,
         display: 'name',
