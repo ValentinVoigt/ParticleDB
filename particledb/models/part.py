@@ -1,5 +1,6 @@
 from sqlalchemy import Table, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
+from pyramid.decorator import reify
 
 from . import Base
 
@@ -24,3 +25,14 @@ class Part(Base):
     @property
     def in_stock(self):
         return len(self.stocks) > 0 and sum([i.quantity for i in self.stocks]) > 0
+
+    @reify
+    def image(self):
+        """
+        Returns the first UploadedFile object which contains an image.
+        May return None.
+        """
+        for file_ in self.files:
+            if file_.content_type.startswith("image/"):
+                return file_
+        return None

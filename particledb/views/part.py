@@ -1,11 +1,22 @@
+import requests
+import io
+
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound, HTTPBadRequest
 from pyramid.decorator import reify
 from sqlalchemy.orm.exc import NoResultFound
 
-from ..models import DBSession, Part, Parameter
 from .base import BaseView
+from .upload import store_file
+from ..models import DBSession, Part, Parameter
 from ..utils.dbhelpers import get_by_or_404, get_or_404
+from ..utils.octopart import Octopart
+
+class FakeUploadFromUrl:
+
+    def __init__(self, url):
+        self.file = io.BytesIO(requests.get(url).content)
+        self.filename = url[url.rfind('/'):]
 
 class PartView(BaseView):
 
@@ -112,3 +123,34 @@ class PartView(BaseView):
             mymap[order[i]].order = i
 
         return {}
+
+    @view_config(
+        route_name='import_part',
+        request_method='POST',
+    )
+    def import_part(self):
+        data = Octopart(self.request.registry.settings).match(self.part.mpn)
+        if len(data['results'][0]['items']) > 0:
+            item = data['results'][0]['items'][0]
+
+            # Image
+            try:
+                images = item['imagesets'][0]
+                image = images.get('large_image') or  images.get('medium_image') or images.get('small_image') or images.get('swatch_image')
+                if image:
+                    file_ = FakeUploadFromUrl(image['url'])
+                    self.part.files.append(store_file(self.request, file_))
+            except (IndexError, KeyError):
+                pass
+            
+            # Specs
+            for speckey, spec in item['specs'].items():
+                try:
+                    key = spec['metadata']['name']
+                    value = spec['display_value']
+                    parameter = Parameter(key=key, value=value)
+                    self.part.parameters.append(parameter)
+                except KeyError:
+                    pass
+
+        return HTTPFound(self.request.route_path("part", part_mpn=self.part.mpn))

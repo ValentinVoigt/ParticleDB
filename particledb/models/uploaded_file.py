@@ -7,9 +7,6 @@ import os
 import magic
 import math
 
-# Contains a list of objects marked for deletion if the transaction got committed
-delete_after_commit = []
-
 class UploadedFile(Base):
     """ Represents an uploaded file.
 
@@ -77,17 +74,20 @@ class UploadedFile(Base):
 # once the object gets deleted. If the transaction is rolled back,
 # the file is not deleted.
 
+# Contains a list of objects marked for deletion if the transaction got committed
+UploadedFile.delete_after_commit = []
+
 @event.listens_for(UploadedFile, 'after_delete')
 def on_after_delete(mapper, connection, target):
-    delete_after_commit.append(target)
+    UploadedFile.delete_after_commit.append(target)
 
 @event.listens_for(DBSession, 'after_commit')
 def on_after_commit(session):
     from pyramid.threadlocal import get_current_request
-    for file_ in delete_after_commit:
+    for file_ in UploadedFile.delete_after_commit:
         if session.object_session(file_) == session:
-            file_.delete(get_current_request())
+            file_.delete(get_current_request(), ignore_missing=True)
 
 @event.listens_for(DBSession, 'after_rollback')
 def on_after_rollback(session):
-    delete_after_commit = list(filter(lambda f: f in session, delete_after_commit))
+    UploadedFile.delete_after_commit = list(filter(lambda f: f in session, UploadedFile.delete_after_commit))

@@ -1,7 +1,5 @@
 <%inherit file="base.mak" />
 
-## <%namespace file="functions/manufacturer.mak" import="make_manufacturer" />
-
 <%block name="javascript">
     <script src="${request.static_url('particledb:static/js/storage.js')}"></script>
 </%block>

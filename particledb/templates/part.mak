@@ -1,6 +1,6 @@
 <%inherit file="base.mak" />
 
-<%namespace file="functions/manufacturer.mak" import="make_manufacturer" />
+<%namespace file="particledb:templates/functions/image.mak" import="make_image" />
 
 <%block name="javascript">
     <script src="${request.static_url('particledb:static/js/part.js')}"></script>
@@ -64,9 +64,29 @@
     </div>
 
     <div class="col-md-4">
-        % if part.manufacturer:
-            ${make_manufacturer(part.manufacturer)}
-        % endif
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    ${part.mpn}
+                    % if part.manufacturer:
+                        from ${part.manufacturer.name}
+                    % endif
+                </h3>
+            </div>
+            <div class="panel-body">
+                % if part.image:
+                    ${make_image(part.image, width=150)}
+                % endif
+                % if part.manufacturer and part.manufacturer.logo_image:
+                    ${make_image(part.manufacturer.logo_image, width=150)}
+                % endif
+            </div>
+            % if part.manufacturer and part.manufacturer.url:
+                <div class="panel-footer">
+                    <a href="${part.manufacturer.url}" target="_blank">${part.manufacturer.url}</a>
+                </div>
+            % endif
+        </div>
     </div>
 </div>
 
@@ -181,3 +201,7 @@
         <button type="button" class="btn btn-danger pull-right" id="remove-part">Remove from database</button>
     </form>
 % endif
+
+<form action="${request.route_path('import_part', part_mpn=part.mpn)}" method="POST" id="import-part-form">
+    <input type="submit" style="margin:0 1em" class="btn btn-info pull-right" id="import-part" value="Import from Octopart">
+</form>
